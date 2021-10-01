@@ -4,6 +4,25 @@
 
 {% block body %}
 
-    <h1>{{ category.name }}</h1>
+    <section class="row p-2">
+        <div class="col-12">
+            <h1>{{ category.name }}</h1>
+            <p>{{ category.description }}</p>
+
+            <div class="row">
+                {% for post in category.posts %}
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.description }}</p>
+                    </div>
+                {% else %}
+                    <div class="alert alert-dark" role="alert">
+                        Nothing here
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section
 
 {% endblock %}

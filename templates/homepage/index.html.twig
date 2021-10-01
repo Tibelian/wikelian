@@ -21,9 +21,9 @@
                 <div class="border shadow-sm">
                     <h3 class="bg-dark text-white text-center p-2 mb-0">{{ category.name }}</h3>
 
-                    {% if category.childs|length > 0 %}
+                    {% if category.children|length > 0 %}
                     <div class="list-group rounded-0">
-                        {% for child in category.childs %}
+                        {% for child in category.children %}
                             <a href="{{ path('category', {'slug':child.slug}) }}"
                                 class="list-group-item list-group-item-action">
                                 {% if child.thumbnail %}

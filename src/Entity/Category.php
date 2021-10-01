@@ -40,14 +40,14 @@ class Category
     private $posts;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="childs")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="children")
      */
     private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity=Category::class, mappedBy="parent")
      */
-    private $childs;
+    private $children;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -57,7 +57,7 @@ class Category
     public function __construct()
     {
         $this->posts = new ArrayCollection();
-        $this->childs = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,15 +146,15 @@ class Category
     /**
      * @return Collection|self[]
      */
-    public function getChilds(): Collection
+    public function getChildren(): Collection
     {
-        return $this->childs;
+        return $this->children;
     }
 
     public function addChild(self $child): self
     {
-        if (!$this->child->contains($child)) {
-            $this->child[] = $child;
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
             $child->setParent($this);
         }
 
@@ -163,7 +163,7 @@ class Category
 
     public function removeChild(self $child): self
     {
-        if ($this->child->removeElement($child)) {
+        if ($this->children->removeElement($child)) {
             // set the owning side to null (unless already changed)
             if ($child->getParent() === $this) {
                 $child->setParent(null);
