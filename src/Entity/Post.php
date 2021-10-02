@@ -56,7 +56,7 @@ class Post
     private $views;
 
     /**
-     * @ORM\OneToMany(targetEntity=Taxonomy::class, mappedBy="Post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Taxonomy::class, mappedBy="post", orphanRemoval=true)
      */
     private $taxonomies;
 
@@ -182,5 +182,45 @@ class Post
         }
 
         return $this;
+    }
+
+    public function getUpgrades(): array
+    {
+        $upgrades = [];
+
+        // max upgrade example: sword +0 to sword +10
+        for ($i = 0; $i < 10; $i++)
+        {
+            $upgrades[$i] = [
+                'name' => '',
+                'requirements' => [],
+                'attributes' => []
+            ];
+            foreach ($this->taxonomies as $tx)
+            {
+                switch($tx->getTerm())
+                {
+                    case 'upgrade_name_' . $i:
+                        $upgrades[$i]['name'] = $tx->getValue();
+                    break;
+                    case 'upgrade_requirement_' . $i:
+                        $upgrades[$i]['requirements'][] = $tx->getValue();
+                    break;
+                    case 'upgrade_attribute_' . $i:
+                        $upgrades[$i]['attributes'][] = $tx->getValue();
+                    break;
+                }
+            }
+        }
+
+        $k = 0;
+        foreach ($upgrades as &$upgrade) {
+            if (empty($upgrade['name'])) {
+                unset($upgrades[$k]);
+            }
+            $k++;
+        }
+
+        return $upgrades;
     }
 }

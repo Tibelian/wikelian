@@ -55,3 +55,10 @@ BOOTSTRAP MODIFICATIONS
     text-overflow: ellipsis;
     padding-bottom: 0 !important;
 }
+
+/*
+DETAILS
+*/
+ul ul li {
+    font-size: 13px;
+}

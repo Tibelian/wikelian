@@ -1,0 +1,38 @@
+
+{% if post.upgrades|length > 0 %}
+
+    <div class="row p-3">
+        <h2>Item upgrades and attributes:</h2>
+        {% for upgrade in post.upgrades %}
+            <div class="col-md-4">
+                <div class="bg-light shadow-sm p-2 h-100">
+
+                    <h3>{{ upgrade.name }}</h3>
+
+                    <ul class="mb-0">
+                        {% if upgrade.attributes|length > 0 %}
+                        <li>Attributes
+                            <ul>
+                            {% for attr in upgrade.attributes %}
+                                <li>{{ attr }}</li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if upgrade.requirements|length > 0 %}
+                        <li>Requirements
+                            <ul>
+                            {% for req in upgrade.requirements %}
+                                <li>{{ req }}</li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                    </ul>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endif %}

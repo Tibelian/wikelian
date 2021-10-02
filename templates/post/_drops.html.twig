@@ -1,0 +1,51 @@
+
+{% set dropStone = false %}
+{% set dropMonster = false %}
+{% set dropChest = false %}
+{% for tx in post.taxonomies %}
+    {% if tx.term == 'drop_stone' %}
+        {% set dropStone = true %}
+    {% endif %}
+    {% if tx.term == 'drop_monster' %}
+        {% set dropMonster = true %}
+    {% endif %}
+    {% if tx.term == 'drop_chest' %}
+        {% set dropChest = true %}
+    {% endif %}
+{% endfor %}
+
+<ul class="mt-3">
+    {% if dropStone %}
+    <li class="mb-1"><strong>DROP METINS</strong>:
+        <ul>
+        {% for tx in post.taxonomies %}
+            {% if tx.term == 'drop_stone' %}
+                <li>{{ tx.value }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+    {% if dropMonster %}
+    <li class="mb-1"><strong>DROP MONSTERS</strong>:
+        <ul>
+        {% for tx in post.taxonomies %}
+            {% if tx.term == 'drop_monster' %}
+                <li>{{ tx.value }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+    {% if dropChest %}
+    <li class="mb-1"><strong>DROP CHESTS</strong>:
+        <ul>
+        {% for tx in post.taxonomies %}
+            {% if tx.term == 'drop_chest' %}
+                <li>{{ tx.value }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+</ul>

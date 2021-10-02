@@ -7,27 +7,58 @@
     {% include 'post/_breadcrumb.html.twig' %}
 
     <section class="row justify-content-between p-2">
-        <div class="col-md-9 bg-white shadow-sm border p-0">
+        <div class="col-md-9 p-0">
+            <div class="bg-white shadow-sm border mb-3">
 
-            <h1 class="h2 bg-dark text-white text-center p-2 mb-0">
-                {% if post.thumbnail %}
-                    <img src="{{ post.thumbnail }}" height="22" alt="{{ post.slug }}">
-                {% endif %}
-                {{ post.title }}
-            </h1>
+                <h1 class="h2 bg-dark text-white text-center p-2 mb-0">
+                    {{ post.title }}
+                </h1>
 
-            <div class="p-2">
-                {% if post.content %}
-                    {{ post.content|raw }}
-                {% else %}
-                    <div class="alert alert-dark" role="alert">
-                        Nothing here
+                <div class="d-flex p-3">
+
+                    {% set withoutModel3d = true %}
+                    {% for tx in post.taxonomies %}
+                        {% if tx.term == 'model3d' %}
+                            {% set withoutModel3d = false %}
+                            <iframe src="{{ tx.value }}" style="width: 250px; height: 400px; border: none;"></iframe>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if withoutModel3d and post.thumbnail %}
+                        <img src="{{ post.thumbnail }}" width="100" alt="{{ post.slug }}">
+                    {% endif %}
+
+                    <div class="ps-3 w-100">
+                        
+                        {% if post.content %}
+                            {{ post.content|raw }}
+                        {% endif %}
+                        
+                        <ul class="list-group list-group-horizontal">
+                        {% for tx in post.taxonomies %}
+                            {% if tx.term == 'vnum' %}
+                                <li class="list-group-item"><strong>VNUM</strong>: {{ tx.value }} </li>
+                            {% endif %}
+                            {% if tx.term == 'job' %}
+                                <li class="list-group-item"><strong>CLASS</strong>: {{ tx.value }} </li>
+                            {% endif %}
+                            {% if tx.term == 'sockets' %}
+                                <li class="list-group-item"><strong>SOCKETS</strong>: {{ tx.value }} </li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                        
+                        {% include 'post/_drops.html.twig' %}
+
                     </div>
-                {% endif %}
-            </div>
 
+                </div>
+
+                {% include 'post/_upgrade.html.twig' %}
+
+            </div>
         </div>
-        <div class="col-md-3 ps-3">
+        <div class="col-md-3 ps-3 pe-0">
 
             {% if post.category.posts|length > 1 %}
             <div class="bg-white shadow-sm border mb-3">
@@ -50,12 +81,12 @@
             <div class="bg-white shadow-sm border">
                 <h2 class="bg-dark text-white text-center p-2 mb-0">Last posts</h2>
                 <div class="list-group rounded-0">
-                    {% for postRand in randomPosts %}
-                        <a href="{{ path('post', {'slug':postRand.slug}) }}" class="list-group-item list-group-item-action border-0">
-                            {% if postRand.thumbnail %}
-                                <img src="{{ postRand.thumbnail }}" height="30" alt="{{ postRand.slug }}">
+                    {% for lPost in lastPosts %}
+                        <a href="{{ path('post', {'slug':lPost.slug}) }}" class="list-group-item list-group-item-action border-0">
+                            {% if lPost.thumbnail %}
+                                <img src="{{ lPost.thumbnail }}" height="30" alt="{{ lPost.slug }}">
                             {% endif %}
-                            {{ postRand.title }}
+                            {{ lPost.title }}
                         </a>
                     {% endfor %}
                 </div>

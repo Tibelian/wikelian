@@ -19,12 +19,12 @@ class PostController extends AbstractController
         $this->updateSessionViews($post, $request);
 
         //
-        $randomPosts = $this->getDoctrine()->getRepository(Post::class)->findLast($post->getId(), 5);
+        $lastPosts = $this->getDoctrine()->getRepository(Post::class)->findLast($post->getId(), 5);
 
         // show the template
         return $this->render('post/index.html.twig', [
             'post' => $post,
-            'randomPosts' => $randomPosts
+            'lastPosts' => $lastPosts
         ]);
 
     }
