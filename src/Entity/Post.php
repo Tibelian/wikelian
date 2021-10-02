@@ -48,6 +48,11 @@ class Post
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $views;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +126,18 @@ class Post
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
 
         return $this;
     }
