@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,6 +54,16 @@ class Post
      * @ORM\Column(type="integer")
      */
     private $views;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Taxonomy::class, mappedBy="Post", orphanRemoval=true)
+     */
+    private $taxonomies;
+
+    public function __construct()
+    {
+        $this->taxonomies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,6 +150,36 @@ class Post
     public function setViews(int $views): self
     {
         $this->views = $views;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Taxonomy[]
+     */
+    public function getTaxonomies(): Collection
+    {
+        return $this->taxonomies;
+    }
+
+    public function addTaxonomy(Taxonomy $taxonomy): self
+    {
+        if (!$this->taxonomies->contains($taxonomy)) {
+            $this->taxonomies[] = $taxonomy;
+            $taxonomy->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaxonomy(Taxonomy $taxonomy): self
+    {
+        if ($this->taxonomies->removeElement($taxonomy)) {
+            // set the owning side to null (unless already changed)
+            if ($taxonomy->getPost() === $this) {
+                $taxonomy->setPost(null);
+            }
+        }
 
         return $this;
     }
