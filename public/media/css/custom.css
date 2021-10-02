@@ -8,3 +8,50 @@ body {
 footer {
     margin-top: auto;
 }
+
+/*
+TITLES
+*/
+h1,.h1 {
+    font-size: 30px;
+}
+h2,.h2 {
+    font-size: 24px;
+}
+h3,.h3 {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+/*
+CATEGORIES
+*/
+.masonry-item { width: 33.333%; }
+@media screen and (min-width: 992px) {
+  .masonry-item {width: 20%; }
+}
+@media screen and (max-width: 468px) {
+  .masonry-item {width: 50%; }
+}
+@media screen and (max-width: 320px) {
+  .masonry-item {width: 100%; }
+}
+
+/*
+BOOTSTRAP MODIFICATIONS
+*/
+.btn, .form-control, .alert {
+    border-radius: 0;
+}
+.btn.bg-white {
+    transition: all .3s;
+}
+.btn.bg-white:hover {
+    filter: brightness(.96) !important;
+}
+.btn.bg-white h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-bottom: 0 !important;
+}

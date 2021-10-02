@@ -18,9 +18,13 @@ class PostController extends AbstractController
         // updates the views if is viewed first time this session
         $this->updateSessionViews($post, $request);
 
+        //
+        $randomPosts = $this->getDoctrine()->getRepository(Post::class)->findLast($post->getId(), 5);
+
         // show the template
         return $this->render('post/index.html.twig', [
             'post' => $post,
+            'randomPosts' => $randomPosts
         ]);
 
     }

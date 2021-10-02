@@ -4,6 +4,85 @@
 
 {% block body %}
 
-    <h1>{{ post.title }}</h1>
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('homepage') }}">Wikelian</a>
+            </li>
+            {% if post.category.parent %}
+                {% if post.category.parent.parent %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('category', {'slug':post.category.parent.parent.slug}) }}">{{ post.category.parent.parent.name }}</a>
+                    </li>
+                {% endif %}
+                <li class="breadcrumb-item">
+                    <a href="{{ path('category', {'slug':post.category.parent.slug}) }}">{{ post.category.parent.name }}</a>
+                </li>
+            {% endif %}
+            <li class="breadcrumb-item">
+                <a href="{{ path('category', {'slug':post.category.slug}) }}">{{ post.category.name }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
+        </ol>
+    </nav>
+
+
+    <section class="row justify-content-between p-2">
+        <div class="col-md-9 bg-white shadow-sm border p-0">
+
+            <h1 class="h2 bg-dark text-white text-center p-2 mb-0">
+                {% if post.thumbnail %}
+                    <img src="{{ post.thumbnail }}" height="22" alt="{{ post.slug }}">
+                {% endif %}
+                {{ post.title }}
+            </h1>
+
+            <div class="p-2">
+                {% if post.content %}
+                    {{ post.content|raw }}
+                {% else %}
+                    <div class="alert alert-dark" role="alert">
+                        Nothing here
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="col-md-3 ps-3">
+
+            {% if post.category.posts|length > 1 %}
+            <div class="bg-white shadow-sm border mb-3">
+                <h2 class="bg-dark text-white text-center p-2 mb-0">Same category posts</h2>
+                <div class="list-group rounded-0">
+                    {% for postCat in post.category.posts %}
+                        {% if postCat.id != post.id %}
+                            <a href="{{ path('post', {'slug':postCat.slug}) }}" class="list-group-item list-group-item-action border-0">
+                                {% if postCat.thumbnail %}
+                                    <img src="{{ postCat.thumbnail }}" height="30" alt="{{ postCat.slug }}">
+                                {% endif %}
+                                {{ postCat.title }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="bg-white shadow-sm border">
+                <h2 class="bg-dark text-white text-center p-2 mb-0">Last posts</h2>
+                <div class="list-group rounded-0">
+                    {% for postRand in randomPosts %}
+                        <a href="{{ path('post', {'slug':postRand.slug}) }}" class="list-group-item list-group-item-action border-0">
+                            {% if postRand.thumbnail %}
+                                <img src="{{ postRand.thumbnail }}" height="30" alt="{{ postRand.slug }}">
+                            {% endif %}
+                            {{ postRand.title }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
 
 {% endblock %}
