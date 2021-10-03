@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @Vich\Uploadable();
  */
 class Post
 {
@@ -33,6 +36,16 @@ class Post
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $thumbnail;
+
+    /**
+     * @Vich\UploadableField(mapping="thumbnails", fileNameProperty="thumbnail")
+     */
+    private $thumbnailFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -63,6 +76,7 @@ class Post
     public function __construct()
     {
         $this->taxonomies = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -102,6 +116,22 @@ class Post
     public function setThumbnail(?string $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
+    }
+
+    public function setThumbnailFile($thumbnailFile): self
+    {
+        $this->thumbnailFile = $thumbnailFile;
+
+        if ($thumbnailFile) {
+            $this->updatedAt = new \DateTime();
+        }
 
         return $this;
     }
@@ -150,6 +180,18 @@ class Post
     public function setViews(int $views): self
     {
         $this->views = $views;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
