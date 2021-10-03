@@ -62,3 +62,22 @@ DETAILS
 ul ul li {
     font-size: 13px;
 }
+ul li {
+    font-size: 14px;
+}
+.wk_post_info {
+    display: flex;
+    flex-wrap: wrap;
+}
+.wk_post_desc {
+    width: calc(100% - 250px);
+}
+@media (max-width: 600px) {
+    .wk_post_info {
+        justify-content: center;
+    }
+    .wk_post_desc {
+        width: 100%;
+        margin-top: 25px;
+    }
+}

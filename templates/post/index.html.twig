@@ -14,7 +14,7 @@
                     {{ post.title }}
                 </h1>
 
-                <div class="d-flex p-3">
+                <div class="wk_post_info p-3">
 
                     {% set withoutModel3d = true %}
                     {% for tx in post.taxonomies %}
@@ -28,22 +28,22 @@
                         <img src="{{ post.thumbnail }}" width="100" alt="{{ post.slug }}">
                     {% endif %}
 
-                    <div class="ps-3 w-100">
+                    <div class="ps-3 wk_post_desc">
                         
                         {% if post.content %}
                             {{ post.content|raw }}
                         {% endif %}
                         
-                        <ul class="list-group list-group-horizontal">
+                        <ul class="list-group list-group-horizontal-xl">
                         {% for tx in post.taxonomies %}
                             {% if tx.term == 'vnum' %}
-                                <li class="list-group-item"><strong>VNUM</strong>: {{ tx.value }} </li>
+                                <li class="list-group-item w-100"><strong>VNUM</strong>: {{ tx.value }} </li>
                             {% endif %}
                             {% if tx.term == 'job' %}
-                                <li class="list-group-item"><strong>CLASS</strong>: {{ tx.value }} </li>
+                                <li class="list-group-item w-100"><strong>CLASS</strong>: {{ tx.value }} </li>
                             {% endif %}
                             {% if tx.term == 'sockets' %}
-                                <li class="list-group-item"><strong>SOCKETS</strong>: {{ tx.value }} </li>
+                                <li class="list-group-item w-100"><strong>SOCKETS</strong>: {{ tx.value }} </li>
                             {% endif %}
                         {% endfor %}
                         </ul>
