@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{slug}", name="category")
+     * @Route("/c/{slug}", name="category")
      */
     public function index(Category $category): Response
     {

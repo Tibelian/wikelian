@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/post/{slug}", name="post")
+     * @Route("/p/{slug}", name="post")
      */
     public function showOne(Post $post, Request $request): Response
     {
