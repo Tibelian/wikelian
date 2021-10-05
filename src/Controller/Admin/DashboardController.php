@@ -19,21 +19,7 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        // redirect to some CRUD controller
-        //$routeBuilder = $this->get(AdminUrlGenerator::class);
-
-        //return $this->redirect($routeBuilder->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // you can also redirect to different pages depending on the current user
-        //if ('jane' === $this->getUser()->getUsername()) {
-        //    return $this->redirect('...');
-        //}
-
-        // you can also render some template to display a proper Dashboard
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //return $this->render('admin/dashboard.html.twig');
-
-        return parent::index();
+        return $this->render('bundles/EasyAdminBundle/welcome.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -80,10 +66,16 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
+        yield MenuItem::section("Articles");
         yield MenuItem::linkToCrud('Post', 'fa fa-newspaper', Post::class);
         yield MenuItem::linkToCrud('Category', 'fa fa-tags', Category::class);
         yield MenuItem::linkToCrud('Taxonomy', 'fa fa-cubes', Taxonomy::class);
+
+        yield MenuItem::section("Design");
         yield MenuItem::linkToCrud('Menu', 'fa fa-list', Menu::class);
+
+        yield MenuItem::section("Settings");
+        //yield MenuItem::linkToCrud('Menu', 'fa fa-list', Menu::class);
         
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

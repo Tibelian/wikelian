@@ -5,8 +5,6 @@ namespace App\Entity;
 use App\Repository\TaxonomyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
-
 /**
  * @ORM\Entity(repositoryClass=TaxonomyRepository::class)
  */
@@ -30,7 +28,7 @@ class Taxonomy
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="taxonomies")
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="taxonomies", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $post;

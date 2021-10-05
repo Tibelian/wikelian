@@ -69,7 +69,7 @@ class Post
     private $views;
 
     /**
-     * @ORM\OneToMany(targetEntity=Taxonomy::class, mappedBy="post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Taxonomy::class, mappedBy="post", cascade={"persist", "remove"})
      */
     private $taxonomies;
 
@@ -265,6 +265,11 @@ class Post
 
         return $upgrades;
     }
+
+    
+
+
+    // easyadmin
 
     public function __toString()
     {
