@@ -35,7 +35,7 @@
                             <div class="my-auto">
                                 {% if post.thumbnail %}
                                     <a href="{{ path('post', {'slug':post.slug}) }}">
-                                        <img src="{{ post.thumbnail }}" height="60" alt="{{ post.slug }}">
+                                        <img src="/images/uploaded/{{ post.thumbnail }}" height="60" alt="{{ post.slug }}">
                                     </a>
                                 {% endif %}
                             </div>

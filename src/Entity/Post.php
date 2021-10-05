@@ -265,4 +265,9 @@ class Post
 
         return $upgrades;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }

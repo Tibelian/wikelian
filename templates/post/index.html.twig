@@ -25,7 +25,7 @@
                     {% endfor %}
 
                     {% if withoutModel3d and post.thumbnail %}
-                        <img src="{{ post.thumbnail }}" width="100" alt="{{ post.slug }}">
+                        <img src="/images/uploaded/{{ post.thumbnail }}" width="100" alt="{{ post.slug }}">
                     {% endif %}
 
                     <div class="ps-3 wk_post_desc">
@@ -68,7 +68,7 @@
                         {% if postCat.id != post.id %}
                             <a href="{{ path('post', {'slug':postCat.slug}) }}" class="list-group-item list-group-item-action border-0">
                                 {% if postCat.thumbnail %}
-                                    <img src="{{ postCat.thumbnail }}" height="30" alt="{{ postCat.slug }}">
+                                    <img src="/images/uploaded/{{ postCat.thumbnail }}" height="30" alt="{{ postCat.slug }}">
                                 {% endif %}
                                 {{ postCat.title }}
                             </a>
@@ -84,7 +84,7 @@
                     {% for lPost in lastPosts %}
                         <a href="{{ path('post', {'slug':lPost.slug}) }}" class="list-group-item list-group-item-action border-0">
                             {% if lPost.thumbnail %}
-                                <img src="{{ lPost.thumbnail }}" height="30" alt="{{ lPost.slug }}">
+                                <img src="/images/uploaded/{{ lPost.thumbnail }}" height="30" alt="{{ lPost.slug }}">
                             {% endif %}
                             {{ lPost.title }}
                         </a>

@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -21,6 +22,7 @@ class CategoryCrudController extends AbstractCrudController
         return [
             //IdField::new('id'),
             TextField::new('name'),
+            SlugField::new('slug')->setTargetFieldName('name'),
             AssociationField::new('parent'),
             TextEditorField::new('description'),
         ];

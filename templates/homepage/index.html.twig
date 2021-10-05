@@ -14,7 +14,7 @@
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 py-2">
                 <a href="{{ path('post', {'slug':post.slug}) }}" class="btn bg-white w-100 shadow-sm border h-100">
                     {% if post.thumbnail %}
-                        <img src="{{ post.thumbnail }}" height="35" alt="{{ post.slug }}">
+                        <img src="/images/uploaded/{{ post.thumbnail }}" height="35" alt="{{ post.slug }}">
                     {% endif %}
                     <h3 class="text-center p-2 mb-0">{{ post.title }}</h3>
                 </a>
@@ -55,7 +55,7 @@
                             <a href="{{ path('post', {'slug':post.slug}) }}"
                                 class="list-group-item list-group-item-action">
                                 {% if post.thumbnail %}
-                                    <img src="{{ post.thumbnail }}" height="30" alt="{{ post.slug }}">
+                                    <img src="/images/uploaded/{{ post.thumbnail }}" height="30" alt="{{ post.slug }}">
                                 {% endif %}
                                 {{ post.title }}
                             </a>

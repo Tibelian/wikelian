@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\TaxonomyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use function Symfony\Component\DependencyInjection\Loader\Configurator\ref;
+
 /**
  * @ORM\Entity(repositoryClass=TaxonomyRepository::class)
  */
@@ -72,5 +74,10 @@ class Taxonomy
         $this->post = $post;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getTerm();
     }
 }
