@@ -7,6 +7,9 @@ use App\Form\TaxonomyType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\TextAlign;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+use EasyCorp\Bundle\EasyAdminBundle\Contracts\Controller\CrudControllerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -16,6 +19,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Registry\CrudControllerRegistry;
+use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PostCrudController extends AbstractCrudController
@@ -23,6 +28,14 @@ class PostCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Post::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['id' => 'DESC'])
+            ->showEntityActionsInlined(true)
+        ;
     }
     
     public function configureActions(Actions $actions): Actions
@@ -43,7 +56,6 @@ class PostCrudController extends AbstractCrudController
             })
         ;
     }
-
     
     public function configureFields(string $pageName): iterable
     {
@@ -54,16 +66,31 @@ class PostCrudController extends AbstractCrudController
         }
 
         return [
-            //IdField::new('id'),
             TextField::new('title'),
-            SlugField::new('slug')->setTargetFieldName("title"),
-            ImageField::new('thumbnail')->setBasePath('images/uploaded')->hideOnForm(),
-            TextareaField::new('thumbnailFile')->setFormType(VichImageType::class)->onlyOnForms(),
-            TextField::new('description'),
-            AssociationField::new('category')->setFormTypeOptions(['required' => true]),
+
+            SlugField::new('slug')
+                ->setTargetFieldName("title")
+                ->hideOnIndex(),
+                
+            ImageField::new('thumbnail')
+                ->setBasePath('images/uploaded')
+                ->setTextAlign(TextAlign::LEFT)
+                ->hideOnForm(),
+
+            TextareaField::new('thumbnailFile')
+                ->setFormType(VichImageType::class)
+                ->onlyOnForms(),
+
+            TextField::new('description')
+                ->hideOnIndex(),
+
+            AssociationField::new('category')
+                ->setFormTypeOptions(['required' => true]),
+
             TextEditorField::new('content'),
 
-            HiddenField::new('views')->setFormTypeOptions($viewsOptions),
+            HiddenField::new('views')
+                ->setFormTypeOptions($viewsOptions),
 
             CollectionField::new('taxonomies')
                 ->allowAdd()

@@ -17,6 +17,14 @@ class TaxonomyCrudController extends AbstractCrudController
     {
         return Taxonomy::class;
     }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['id' => 'DESC'])
+            ->showEntityActionsInlined(true)
+        ;
+    }
     
     public function configureActions(Actions $actions): Actions
     {
@@ -31,18 +39,18 @@ class TaxonomyCrudController extends AbstractCrudController
 
         $termOptions = [
             "VNUM" => "vnum",
-            "CLASSES" => "job",
-            "SOCKETS" => "sockets",
-            "DROP METINS" => "drop_stone",
-            "DROP MONSTERS" => "drop_monster",
-            "DROP CHESTS" => "drop_chest",
+            "Classes" => "job",
+            "Sockets" => "sockets",
             "3D Model" => "model3d",
+            "Drop Metins" => "drop_stone",
+            "Drop Monsters" => "drop_monster",
+            "Drop Chests" => "drop_chest",
         ];
         for ($i = 0; $i <= 10; $i++) {
             $termOptions = array_merge($termOptions, [
-                "ITEM NAME +" . $i => "upgrade_name_" . $i,
-                "ITEM ATTRIBUTE +" . $i => "upgrade_attribute_" . $i,
-                "UPGRADE ITEM REQUIREMENT +" . $i => "upgrade_requirement_" . $i,
+                "Item Name +" . $i => "upgrade_name_" . $i,
+                "Item Attribute +" . $i => "upgrade_attribute_" . $i,
+                "Item Requirement +" . $i => "upgrade_requirement_" . $i,
             ]);
         }
 

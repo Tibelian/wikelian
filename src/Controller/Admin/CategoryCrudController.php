@@ -18,6 +18,14 @@ class CategoryCrudController extends AbstractCrudController
     {
         return Category::class;
     }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['id' => 'DESC'])
+            ->showEntityActionsInlined(true)
+        ;
+    }
     
     public function configureActions(Actions $actions): Actions
     {
