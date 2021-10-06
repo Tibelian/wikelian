@@ -7,7 +7,7 @@
     {% include 'post/_breadcrumb.html.twig' %}
 
     <section class="row justify-content-between p-2">
-        <div class="col-md-9 p-0">
+        <div class="col-lg-9 p-0">
             <div class="bg-white shadow-sm border mb-3">
 
                 <h1 class="h2 bg-dark text-white text-center p-2 mb-0">
@@ -16,19 +16,9 @@
 
                 <div class="wk_post_info p-3">
 
-                    {% set withoutModel3d = true %}
-                    {% for tx in post.taxonomies %}
-                        {% if tx.term == 'model3d' %}
-                            {% set withoutModel3d = false %}
-                            <iframe src="{{ tx.value }}" style="width: 250px; height: 400px; border: none;"></iframe>
-                        {% endif %}
-                    {% endfor %}
+                    {% include 'post/_thumbnail.html.twig' %}
 
-                    {% if withoutModel3d and post.thumbnail %}
-                        <img src="/images/uploaded/{{ post.thumbnail }}" width="100" alt="{{ post.slug }}">
-                    {% endif %}
-
-                    <div class="ps-3 wk_post_desc">
+                    <div class="ps-0 ps-md-3 wk_post_desc">
                         
                         {% if post.content %}
                             {{ post.content|raw }}
@@ -58,11 +48,11 @@
 
             </div>
         </div>
-        <div class="col-md-3 ps-3 pe-0">
+        <div class="col-lg-3 ps-lg-3 ps-0 pe-0">
 
             {% if post.category.posts|length > 1 %}
             <div class="bg-white shadow-sm border mb-3">
-                <h2 class="bg-dark text-white text-center p-2 mb-0">Same category posts</h2>
+                <h2 class="bg-dark text-white text-center p-2 mb-0">Similar articles</h2>
                 <div class="list-group rounded-0">
                     {% for postCat in post.category.posts %}
                         {% if postCat.id != post.id %}
@@ -79,7 +69,7 @@
             {% endif %}
 
             <div class="bg-white shadow-sm border">
-                <h2 class="bg-dark text-white text-center p-2 mb-0">Last posts</h2>
+                <h2 class="bg-dark text-white text-center p-2 mb-0">Last articles</h2>
                 <div class="list-group rounded-0">
                     {% for lPost in lastPosts %}
                         <a href="{{ path('post', {'slug':lPost.slug}) }}" class="list-group-item list-group-item-action border-0">

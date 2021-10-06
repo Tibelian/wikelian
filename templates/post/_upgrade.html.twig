@@ -2,9 +2,9 @@
 {% if post.upgrades|length > 0 %}
 
     <div class="row p-3">
-        <h2>Item upgrades and attributes:</h2>
+        <h2>Item upgrades:</h2>
         {% for upgrade in post.upgrades %}
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 pb-4 pb-lg-0">
                 <div class="bg-light shadow-sm p-2 h-100">
 
                     <h3>{{ upgrade.name }}</h3>

@@ -1,4 +1,19 @@
 
+:root {
+    --bs-primary: #6174d1;
+}
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+.btn-primary {
+    background-color: var(--bs-primary) !important;
+    color: var(--bs-light) !important;
+}
+
+
 body {
     background-color: var(--bs-light);
     min-height: 100vh;
@@ -7,6 +22,7 @@ body {
 }
 footer {
     margin-top: auto;
+    font-size: 13px;
 }
 
 /*
@@ -55,6 +71,10 @@ BOOTSTRAP MODIFICATIONS
     text-overflow: ellipsis;
     padding-bottom: 0 !important;
 }
+.breadcrumb li a {
+    text-decoration: none;
+    color: var(--bs-dark);
+}
 
 /*
 DETAILS
@@ -72,7 +92,7 @@ ul li {
 .wk_post_desc {
     width: calc(100% - 250px);
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .wk_post_info {
         justify-content: center;
     }

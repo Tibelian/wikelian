@@ -1,0 +1,13 @@
+
+
+{% set withoutModel3d = true %}
+{% for tx in post.taxonomies %}
+    {% if tx.term == 'model3d' %}
+        {% set withoutModel3d = false %}
+        <iframe src="{{ tx.value }}" style="width: 250px; height: 300px; border: none;"></iframe>
+    {% endif %}
+{% endfor %}
+
+{% if withoutModel3d and post.thumbnail %}
+    <img src="/images/uploaded/{{ post.thumbnail }}" width="100" alt="{{ post.slug }}">
+{% endif %}
