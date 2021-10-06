@@ -21,8 +21,20 @@ class CategoryCrudController extends AbstractCrudController
     
     public function configureActions(Actions $actions): Actions
     {
+        $view = Action::new('show', 'Show')
+            ->linkToRoute("category", function(Category $cat): array {
+                return [
+                    'slug' => $cat->getSlug(),
+                ];
+            })
+        ;
         return $actions
             ->add(Crud::PAGE_EDIT, Action::DELETE)
+            ->add(Crud::PAGE_INDEX, $view)
+            ->add(Crud::PAGE_EDIT, $view)
+            ->update(Crud::PAGE_EDIT, 'show', function(Action $action) {
+                return $action->setIcon('fa fa-eye');
+            })
         ;
     }
 
