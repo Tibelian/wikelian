@@ -7,10 +7,10 @@
     {% include 'post/_breadcrumb.html.twig' %}
 
     <section class="row justify-content-between p-2">
-        <div class="col-lg-9 p-0">
-            <div class="bg-white shadow-sm border mb-3">
+        <article class="col-lg-10 p-0 pe-lg-3 pe-0">
+            <div class="post-content mb-3">
 
-                <h1 class="h2 bg-dark text-white text-center p-2 mb-0">
+                <h1>
                     {{ post.title }}
                 </h1>
 
@@ -47,12 +47,12 @@
                 {% include 'post/_upgrade.html.twig' %}
 
             </div>
-        </div>
-        <div class="col-lg-3 ps-lg-3 ps-0 pe-0">
+        </article>
+        <aside class="col-lg-2 p-0">
 
             {% if post.category.posts|length > 1 %}
-            <div class="bg-white shadow-sm border mb-3">
-                <h2 class="bg-dark text-white text-center p-2 mb-0">Similar articles</h2>
+            <div class="aside-content">
+                <h2 class="p-2 mb-0">Similar articles</h2>
                 <div class="list-group rounded-0">
                     {% for postCat in post.category.posts %}
                         {% if postCat.id != post.id %}
@@ -68,8 +68,8 @@
             </div>
             {% endif %}
 
-            <div class="bg-white shadow-sm border">
-                <h2 class="bg-dark text-white text-center p-2 mb-0">Last articles</h2>
+            <div class="aside-content">
+                <h2 class="p-2 mb-0">Last articles</h2>
                 <div class="list-group rounded-0">
                     {% for lPost in lastPosts %}
                         <a href="{{ path('post', {'slug':lPost.slug}) }}" class="list-group-item list-group-item-action border-0">
@@ -83,6 +83,6 @@
             </div>
 
         </div>
-    </section>
+    </aside>
 
 {% endblock %}

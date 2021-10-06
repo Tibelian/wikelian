@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <section class="row p-2">
+    <section class="row p-2 wk_popular">
 
         <div class="col-12 p-3">
             <h2>Most popular articles</h2>
@@ -12,7 +12,7 @@
 
         {% for post in popularPosts %}
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 py-2">
-                <a href="{{ path('post', {'slug':post.slug}) }}" class="btn bg-white w-100 shadow-sm border h-100">
+                <a href="{{ path('post', {'slug':post.slug}) }}" class="btn w-100 h-100">
                     {% if post.thumbnail %}
                         <img src="/images/uploaded/{{ post.thumbnail }}" height="35" alt="{{ post.slug }}">
                     {% endif %}
@@ -23,7 +23,7 @@
 
     </section>
 
-    <section class="row p-2">
+    <section class="row p-2 wk_categories">
 
         <div class="col-12 p-3">
             <h2>All categories</h2>
@@ -32,8 +32,8 @@
         <div class="d-flex flex-wrap w-100 js-masonry p-0">
         {% for category in categories %}
             <div class="masonry-item p-2">
-                <div class="border shadow-sm">
-                    <h3 class="bg-dark text-white text-center p-2 mb-0">{{ category.name }}</h3>
+                <div class="wk_category">
+                    <h3 class="p-2 mb-0">{{ category.name }}</h3>
 
                     {% if category.children|length > 0 %}
                     <div class="list-group rounded-0">
@@ -43,7 +43,7 @@
                                 {% if child.thumbnail %}
                                     <img src="{{ child.thumbnail }}" height="30" alt="{{ child.slug }}">
                                 {% endif %}
-                                {{ child.name }} <span class="badge bg-light text-secondary border">{{ child.posts|length }}</span>
+                                {{ child.name }} <span class="badge">{{ child.posts|length }}</span>
                             </a>
                         {% endfor %}
                     </div>

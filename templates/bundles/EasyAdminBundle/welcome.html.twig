@@ -10,7 +10,7 @@
 
         <div class="col-6 col-xl-3 pb-4">
             <div class="bg-light border p-3 d-flex flex-wrap">
-                <p class="w-100 border-bottom pb-2 px-1 fw-bold">Posts</p>
+                <p class="w-100 border-bottom pb-2 px-1 text-primary">Posts</p>
                 <div class="d-flex px-3 w-100">
                     <span class="display-3 me-auto fw-bolder">{{ posts|length }}</span>
                     <i class="fa fa-file-alt display-3 text-secondary"></i>
@@ -20,7 +20,7 @@
 
         <div class="col-6 col-xl-3 pb-4">
             <div class="bg-light border p-3 d-flex flex-wrap">
-                <p class="w-100 border-bottom pb-2 px-1 fw-bold">Posts views</p>
+                <p class="w-100 border-bottom pb-2 px-1 text-primary">Posts views</p>
                 <div class="d-flex px-3 w-100">
                     {% set views = 0 %}
                     {% for post in posts %}
@@ -34,7 +34,7 @@
 
         <div class="col-6 col-xl-3 pb-4">
             <div class="bg-light border p-3">
-                <p class="w-100 border-bottom pb-2 px-1 fw-bold">Categories</p>
+                <p class="w-100 border-bottom pb-2 px-1 text-primary">Categories</p>
                 <div class="d-flex px-3 w-100">
                     <span class="display-3 me-auto fw-bolder">{{ categories|length }}</span>
                     <i class="fa fa-list-alt display-3 text-secondary"></i>
@@ -44,7 +44,7 @@
 
         <div class="col-6 col-xl-3 pb-4">
             <div class="bg-light border p-3 d-flex flex-wrap">
-                <p class="w-100 border-bottom pb-2 px-1 fw-bold">Users</p>
+                <p class="w-100 border-bottom pb-2 px-1 text-primary">Users</p>
                 <div class="d-flex px-3 w-100">
                     <span class="display-3 me-auto fw-bolder">{{ users|length }}</span>
                     <i class="fa fa-user display-3 text-secondary"></i>

@@ -1,6 +1,14 @@
 
 :root {
     --bs-primary: #6174d1;
+    --text-shadow: -1px -1px 0.1px black, -1px 1px 0.1px black, 1px 1px 0.1px black, 1px -1px 0.1px black, -1px 0px 0.1px black, 1px 0px 0.1px black, 0px 1px 0.1px black, 0px -1px 0.1px black;
+    --gold: #ffc700;
+    --green: #89b88d;
+    --gray: #c1c1c1;
+    --red: #5d0505;
+    --yellow: #f0d9a2;
+    --white: #FFFFE0;
+    --darkred: #1f0e02;
 }
 .bg-primary {
     background-color: var(--bs-primary) !important;
@@ -19,10 +27,21 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: PTSans, 'Trebuchet MS', 'Helvetica Neue', 'Nimbus Sans', 'Helvetica', 'Arial',sans-serif;
+    background-color: var(--red);
 }
+@font-face {
+    font-family: PTSans;
+    src: url('/media/fonts/PTSans-Regular.ttf');
+  }
+
 footer {
     margin-top: auto;
     font-size: 13px;
+    color: var(--yellow);
+}
+aside {
+    font-size: 14px;
 }
 
 /*
@@ -71,9 +90,15 @@ BOOTSTRAP MODIFICATIONS
     text-overflow: ellipsis;
     padding-bottom: 0 !important;
 }
+.breadcrumb li {
+    color: var(--yellow) !important;
+}
+.breadcrumb li::before {
+    color: var(--gold) !important;
+}
 .breadcrumb li a {
     text-decoration: none;
-    color: var(--bs-dark);
+    color: var(--gold);
 }
 
 /*
@@ -100,4 +125,165 @@ ul li {
         width: 100%;
         margin-top: 25px;
     }
+}
+
+
+/*
+NAVBAR
+*/
+nav.navbar {
+    background-color: var(--darkred) !important;
+    color: var(--yellow);
+    border-bottom: 1px solid var(--gold);
+}
+nav.navbar a {
+    color: var(--yellow) !important;
+}
+nav.navbar a:hover {
+    color: var(--gold) !important;
+}
+
+
+/*
+POST PAGE
+*/
+article h1 {
+    border-bottom: 2px solid var(--red);
+    padding-top: 20px !important;
+    margin: 0 20px !important;
+    color: var(--red);
+}
+.post-content {
+    border: 1px solid var(--red);
+    background-color: var(--yellow);
+}
+.post-content ul li {
+    background-color: var(--white);
+}
+
+/*
+POST ASIDE
+*/
+aside .aside-content {
+    border: 1px solid var(--gold);
+    border-bottom: 0;
+    border-top: 0;
+    padding: 15px;
+}
+aside .aside-content:last-child {
+    border-bottom: 1px solid var(--gold);
+}
+aside .aside-content:first-child {
+    border-top: 1px solid var(--gold);
+}
+.aside-content h2 {
+    border-bottom: 1px solid var(--white);
+    color: var(--white) !important;
+    padding: 0 !important;
+    margin-bottom: 10px !important;
+    font-size: 16px;
+}
+.aside-content, .aside-content .list-group a {
+    background-color: var(--darkred);
+    color: var(--yellow);
+}
+.aside-content .list-group a:hover {
+    color: var(--gold) !important;
+}
+
+
+/*
+ITEM UPGRADES
+*/
+.item-upgrade {
+    width: 20%;
+}
+.item-upgrade .item {
+    background-color: var(--darkred) !important;
+}
+@media (max-width: 968px) {
+    .item-upgrade {
+        width: 50%;
+    }
+}
+@media (max-width: 438px) {
+    .item-upgrade {
+        width: 100%;
+    }
+}
+.item-upgrade h3 {
+    color: var(--bs-warning);
+    font-size: 16px;
+    text-align: center;
+    text-shadow: var(--text-shadow);
+}
+.item-upgrade ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 12px !important;
+}
+.item-upgrade ul li {
+    background-color: transparent;
+}
+.item-upgrade .req_wear {
+    margin-top: 5px;
+    color: var(--gray);
+    text-shadow: var(--text-shadow);
+}
+.item-upgrade .attr {
+    margin-top: 5px;
+    color: var(--green);
+    text-shadow: var(--text-shadow);
+}
+.item-upgrade .req {
+    margin-top: 5px;
+    color: var(--bs-danger);
+    text-shadow: var(--text-shadow);
+    font-weight: bold;
+}
+
+
+/*
+WELCOME PAGE
+*/
+.wk_popular h2, .wk_categories h2 {
+    color: var(--gold);
+}
+.wk_popular .btn {
+    background-color: var(--darkred);
+    color: var(--yellow);
+}
+.wk_popular .btn:hover {
+    color: var(--white);
+}
+.wk_category h3 {
+    background-color: var(--darkred);
+    color: var(--white);
+    text-align: center;
+}
+.wk_category .list-group .list-group-item  {
+    background-color: var(--yellow);
+    color: var(--darkred);
+}
+.wk_category .badge {
+    background-color: var(--red);
+    color: var(--white);
+}
+.wk_category_page {
+    background-color: var(--yellow);
+    border: 1px solid var(--red);
+}
+.wk_category_page_item {
+    background-color: var(--white);
+}
+.wk_category_page_item .badge {
+    background-color: var(--red);
+    color: var(--white);
+    font-size: 14px !important;
+}
+.wk_category_page h1 {
+    color: var(--red);
+    border-bottom: 2px solid var(--red);
 }
