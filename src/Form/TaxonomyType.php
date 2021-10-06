@@ -24,9 +24,10 @@ class TaxonomyType extends AbstractType
         ];
         for ($i = 0; $i <= 10; $i++) {
             $termOptions = array_merge($termOptions, [
-                "Item Name +" . $i => "upgrade_name_" . $i,
-                "Item Attribute +" . $i => "upgrade_attribute_" . $i,
-                "Item Requirement +" . $i => "upgrade_requirement_" . $i,
+                "Item Name +" . $i => "item_name_" . $i,
+                "Item Attribute +" . $i => "item_attribute_" . $i,
+                "Item Requirement +" . $i => "item_requirement_" . $i,
+                "Item Upgrade Requirement +" . $i => "upgrade_requirement_" . $i,
             ]);
         }
         $builder
