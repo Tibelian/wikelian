@@ -20,7 +20,18 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        return $this->render('bundles/EasyAdminBundle/welcome.html.twig');
+
+        $em = $this->getDoctrine();
+
+        $posts = $em->getRepository(Post::class)->findAll();
+        $categories = $em->getRepository(Category::class)->findAll();
+        $users = $em->getRepository(User::class)->findAll();
+
+        return $this->render('bundles/EasyAdminBundle/welcome.html.twig', [
+            'posts' => $posts,
+            'categories' => $categories,
+            'users' => $users,
+        ]);
     }
 
     public function configureDashboard(): Dashboard
