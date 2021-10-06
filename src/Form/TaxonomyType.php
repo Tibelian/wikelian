@@ -32,9 +32,12 @@ class TaxonomyType extends AbstractType
         }
         $builder
             ->add('term', ChoiceType::class, [
+                'required' => true,
                 'choices' => $termOptions
             ])
-            ->add('value', TextareaType::class)
+            ->add('value', TextareaType::class, [
+                'required' => true,
+            ])
         ;
     }
 

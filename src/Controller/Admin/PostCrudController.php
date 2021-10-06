@@ -97,6 +97,8 @@ class PostCrudController extends AbstractCrudController
                 ->setEntryIsComplex(false)
                 ->showEntryLabel(false)
                 ->setEntryType(TaxonomyType::class)
+                ->addCssClass("mb-5")
+                ->setRequired(true)
                 ->hideOnIndex(),
 
         ];

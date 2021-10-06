@@ -235,6 +235,7 @@ class Post
         {
             $upgrades[$i] = [
                 'name' => '',
+                'requirements_wear' => [],
                 'requirements' => [],
                 'attributes' => []
             ];
@@ -242,13 +243,16 @@ class Post
             {
                 switch($tx->getTerm())
                 {
-                    case 'upgrade_name_' . $i:
+                    case 'item_name_' . $i:
                         $upgrades[$i]['name'] = $tx->getValue();
+                    break;
+                    case 'item_requirement_' . $i:
+                        $upgrades[$i]['requirements_wear'][] = $tx->getValue();
                     break;
                     case 'upgrade_requirement_' . $i:
                         $upgrades[$i]['requirements'][] = $tx->getValue();
                     break;
-                    case 'upgrade_attribute_' . $i:
+                    case 'item_attribute_' . $i:
                         $upgrades[$i]['attributes'][] = $tx->getValue();
                     break;
                 }

@@ -76,6 +76,21 @@ class Taxonomy
 
     public function __toString(): string
     {
-        return $this->getTerm();
+
+        for ($i = 0; $i <= 10; $i++) {
+            if ($this->term == 'item_name_' . $i) return "Item Name +" . $i;
+            if ($this->term == 'item_attribute_' . $i) return "Item Attribute +" . $i;
+            if ($this->term == 'item_requirement_' . $i) return "Item Requirement +" . $i;
+            if ($this->term == 'upgrade_requirement_' . $i) return "Item Upgrade Requirement +" . $i;
+        }
+        if ($this->term == 'vnum') return 'VNUM';
+        if ($this->term == 'job') return 'Classes';
+        if ($this->term == 'sockets') return 'Sockets';
+        if ($this->term == 'model3d') return '3D Model';
+        if ($this->term == 'drop_stone') return 'Drop Metin Stone';
+        if ($this->term == 'drop_monster') return 'Drop Monster';
+        if ($this->term == 'drop_chest') return 'Drop Chest';
+
+        return $this->term;
     }
 }
