@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Menu;
 use App\Entity\Post;
 use App\Entity\Taxonomy;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -75,7 +76,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Menu', 'fa fa-list', Menu::class);
 
         yield MenuItem::section("Settings");
-        //yield MenuItem::linkToCrud('Menu', 'fa fa-list', Menu::class);
+        yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class);
         
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

@@ -40,6 +40,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $email;
 
+    private $plainPassword = null;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $updatedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,7 +128,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $password): void
+    {
+        if ($password) {
+            $this->setUpdatedAt(new \DateTimeImmutable());
+        }
+        $this->plainPassword = $password;
     }
 
     public function getEmail(): ?string
@@ -132,6 +152,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
