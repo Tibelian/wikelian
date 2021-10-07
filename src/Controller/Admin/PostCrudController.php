@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
@@ -86,6 +87,14 @@ class PostCrudController extends AbstractCrudController
 
             AssociationField::new('category')
                 ->setFormTypeOptions(['required' => true]),
+
+            ChoiceField::new('type')
+                ->setChoices([
+                    'Article' => 'article',
+                    'Item' => 'item',
+                    'Mission' => 'mission',
+                    'Map' => 'map',
+                ]),
 
             TextEditorField::new('content'),
 

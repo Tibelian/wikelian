@@ -126,6 +126,30 @@ ul li {
         margin-top: 25px;
     }
 }
+.bg-yellow {
+    background-color: var(--yellow);
+}
+.form-control {
+    background-color: rgba(0,0,0,.2);
+    border-color: var(--red);
+}
+.form-control:focus {
+    background-color: rgba(0,0,0,.2);
+    color: var(--red);
+    outline: 1px solid var(--red);
+}
+.btn-primary {
+    background-color: var(--darkred) !important;
+    border-color: var(--darkred);
+}
+img.default {
+    width: 100px;
+}
+img.title {
+    height: 30px;
+    object-fit: contain;
+    float: right;
+}
 
 
 /*
@@ -160,6 +184,23 @@ article h1 {
 .post-content ul li {
     background-color: var(--white);
 }
+.wk_post_article ul li {
+    background-color: transparent !important;
+}
+.wk_post_article ul {
+    background-color: transparent !important;
+    padding: 10px;
+    padding-left: 30px;
+    margin: 5px 0 20px 0;
+}
+.wk_post_article ol ul {
+    padding: 0 !important;
+    padding-left: 20px !important;
+}
+.wk_post_article .wk_post_desc {
+    width: 100% !important;
+}
+
 
 /*
 POST ASIDE
@@ -266,6 +307,9 @@ WELCOME PAGE
 .wk_category .list-group .list-group-item  {
     background-color: var(--yellow);
     color: var(--darkred);
+}
+.wk_category .list-group .list-group-item:hover  {
+    filter: brightness(.95);
 }
 .wk_category .badge {
     background-color: var(--red);

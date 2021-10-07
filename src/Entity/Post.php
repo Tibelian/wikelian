@@ -73,6 +73,11 @@ class Post
      */
     private $taxonomies;
 
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $type = 'article';
+
     public function __construct()
     {
         $this->taxonomies = new ArrayCollection();
@@ -278,5 +283,17 @@ class Post
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

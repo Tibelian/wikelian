@@ -8,6 +8,10 @@
     {% endif %}
 {% endfor %}
 
+{% if class is not defined %}
+    {% set class = 'defualt' %}
+{% endif %}
+
 {% if withoutModel3d and post.thumbnail %}
-    <img src="/images/uploaded/{{ post.thumbnail }}" width="100" alt="{{ post.slug }}">
+    <img src="/images/uploaded/{{ post.thumbnail }}" width="100" alt="{{ post.slug }}" class="{{ class }}">
 {% endif %}
