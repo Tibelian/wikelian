@@ -11,8 +11,8 @@
         </div>
 
         {% for post in popularPosts %}
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2 py-2">
-                <a href="{{ path('post', {'slug':post.slug}) }}" class="btn w-100 h-100">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 py-3">
+                <a href="{{ path('post', {'slug':post.slug}) }}" class="btn w-100 h-100 shadow">
                     {% if post.thumbnail %}
                         <img src="/images/uploaded/{{ post.thumbnail }}" height="35" alt="{{ post.slug }}">
                     {% endif %}
@@ -32,7 +32,7 @@
         <div class="d-flex flex-wrap w-100 js-masonry p-0">
         {% for category in categories %}
             <div class="masonry-item p-2">
-                <div class="wk_category">
+                <div class="wk_category shadow">
                     <h3 class="p-2 mb-0">{{ category.name }}</h3>
 
                     {% if category.children|length > 0 %}
