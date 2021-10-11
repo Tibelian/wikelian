@@ -1,0 +1,38 @@
+
+
+<h1>
+    {{ post.title }}
+</h1>
+
+<div class="wk_post_info p-3">
+
+    {% include 'post/_partials/_thumbnail.html.twig' %}
+
+    <div class="ps-0 ps-md-3 wk_post_desc">
+        
+        {% if post.content %}
+            {{ post.content|raw }}
+        {% endif %}
+        
+        <ul class="list-group list-group-horizontal-xl rounded-0">
+        {% for tx in post.taxonomies %}
+            {% if tx.term == 'vnum' %}
+                <li class="list-group-item w-100 rounded-0"><strong>VNUM</strong>: {{ tx.value }} </li>
+            {% endif %}
+            {% if tx.term == 'job' %}
+                <li class="list-group-item w-100 rounded-0"><strong>CLASS</strong>: {{ tx.value }} </li>
+            {% endif %}
+            {% if tx.term == 'sockets' %}
+                <li class="list-group-item w-100 rounded-0"><strong>SOCKETS</strong>: {{ tx.value }} </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+        
+        {% include 'post/_partials/_drops.html.twig' %}
+
+    </div>
+
+</div>
+
+{% include 'post/_partials/_upgrade.html.twig' %}
+

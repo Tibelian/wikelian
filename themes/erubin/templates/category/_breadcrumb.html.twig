@@ -1,0 +1,19 @@
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('homepage') }}">Wikelian</a>
+        </li>
+        {% if category.parent %}
+            {% if category.parent.parent %}
+                <li class="breadcrumb-item">
+                    <a href="{{ path('category', {'slug':category.parent.parent.slug}) }}">{{ category.parent.parent.name }}</a>
+                </li>
+            {% endif %}
+            <li class="breadcrumb-item">
+                <a href="{{ path('category', {'slug':category.parent.slug}) }}">{{ category.parent.name }}</a>
+            </li>
+        {% endif %}
+        <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+    </ol>
+</nav>

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ pageTitle ~ ' - ' ~ post.title }}{% endblock %}
+
+{% block body %}
+
+    {% include 'post/_partials/_breadcrumb.html.twig' %}
+
+    <section class="row justify-content-between p-2">
+        <article class="col-lg-10 p-0 pe-lg-5 pe-0">
+            <div class="post-content mb-3">
+
+                {% if post.type == 'article' %}
+                    {% include 'post/article.html.twig' %}
+                {% elseif post.type == 'item' %}
+                    {% include 'post/item.html.twig' %}
+                {% elseif post.type == 'mission' %}
+                    {% include 'post/mission.html.twig' %}
+                {% elseif post.type == 'map' %}
+                    {% include 'post/map.html.twig' %}
+                {% endif %}
+
+            </div>
+        </article>
+        <aside class="col-lg-2 p-0">
+
+            {% if post.category.posts|length > 1 %}
+            <div class="aside-content shadow">
+                <h2 class="p-2 mb-0">Similar articles</h2>
+                <div class="list-group rounded-0">
+                    {% for postCat in post.category.posts %}
+                        {% if postCat.id != post.id %}
+                            <a href="{{ path('post', {'slug':postCat.slug}) }}" class="list-group-item list-group-item-action border-0">
+                                {% if postCat.thumbnail %}
+                                    <img src="/images/uploaded/{{ postCat.thumbnail }}" height="30" alt="{{ postCat.slug }}">
+                                {% endif %}
+                                {{ postCat.title }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="aside-content shadow">
+                <h2 class="p-2 mb-0">Last articles</h2>
+                <div class="list-group rounded-0">
+                    {% for lPost in lastPosts %}
+                        <a href="{{ path('post', {'slug':lPost.slug}) }}" class="list-group-item list-group-item-action border-0">
+                            {% if lPost.thumbnail %}
+                                <img src="/images/uploaded/{{ lPost.thumbnail }}" height="30" alt="{{ lPost.slug }}">
+                            {% endif %}
+                            {{ lPost.title }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </aside>
+
+{% endblock %}
