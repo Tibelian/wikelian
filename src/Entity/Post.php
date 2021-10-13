@@ -2,16 +2,22 @@
 
 namespace App\Entity;
 
+use App\Entity\Post\Article;
+use App\Entity\Post\Chest;
+use App\Entity\Post\Item;
+use App\Entity\Post\Map;
+use App\Entity\Post\Mission;
+use App\Entity\Post\Mob;
 use App\Repository\PostRepository;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
+ * @ORM\MappedSuperclass
  * @ORM\Entity(repositoryClass=PostRepository::class)
- * @Vich\Uploadable();
+ * @Vich\Uploadable()
  */
 class Post
 {
@@ -20,63 +26,63 @@ class Post
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    protected $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $content;
+    protected $content;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $thumbnail;
+    protected $thumbnail;
 
     /**
      * @Vich\UploadableField(mapping="thumbnails", fileNameProperty="thumbnail")
      */
-    private $thumbnailFile;
+    protected $thumbnailFile;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category;
+    protected $category;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $views;
+    protected $views;
 
     /**
-     * @ORM\OneToMany(targetEntity=Taxonomy::class, mappedBy="post", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Taxonomy::class, mappedBy="post", orphanRemoval=true)
      */
-    private $taxonomies;
+    protected $taxonomies;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $type = 'article';
+    protected $type = 'article';
 
     public function __construct()
     {
@@ -231,51 +237,39 @@ class Post
         return $this;
     }
 
-    public function getUpgrades(): array
+    public function cast(): object
     {
-        $upgrades = [];
-
-        // max upgrade example: sword +0 to sword +10
-        for ($i = 0; $i < 10; $i++)
-        {
-            $upgrades[$i] = [
-                'name' => '',
-                'requirements_wear' => [],
-                'requirements' => [],
-                'attributes' => []
-            ];
-            foreach ($this->taxonomies as $tx)
-            {
-                switch($tx->getTerm())
-                {
-                    case 'item_name_' . $i:
-                        $upgrades[$i]['name'] = $tx->getValue();
-                    break;
-                    case 'item_requirement_' . $i:
-                        $upgrades[$i]['requirements_wear'][] = $tx->getValue();
-                    break;
-                    case 'upgrade_requirement_' . $i:
-                        $upgrades[$i]['requirements'][] = $tx->getValue();
-                    break;
-                    case 'item_attribute_' . $i:
-                        $upgrades[$i]['attributes'][] = $tx->getValue();
-                    break;
-                }
-            }
+        switch ($this->type) {
+            case 'article': $newObj = new Article(); break;
+            case 'chest': $newObj = new Chest(); break;
+            case 'item': $newObj = new Item(); break;
+            case 'map': $newObj = new Map(); break;
+            case 'mission': $newObj = new Mission(); break;
+            case 'mob': $newObj = new Mob(); break;
+            default: $newObj = new Post(); break;
         }
-
-        $k = 0;
-        foreach ($upgrades as &$upgrade) {
-            if (empty($upgrade['name'])) {
-                unset($upgrades[$k]);
-            }
-            $k++;
-        }
-
-        return $upgrades;
+        $newObj->cloneThis($this, $newObj, $this->id);
+        return $newObj;
     }
 
-    
+    private function cloneThis($fromObj, &$toObj, $id = null): void
+    {
+        $toObj->id = $id; // protected - but i am the parent
+        $toObj->setTitle( $fromObj->getTitle() );
+        $toObj->setContent( $fromObj->getContent() );
+        $toObj->setCategory( $fromObj->getCategory() );
+        $toObj->setThumbnail( $fromObj->getThumbnail() );
+        $toObj->setThumbnailFile( $fromObj->getThumbnailFile() );
+        $toObj->setSlug( $fromObj->getSlug() );
+        $toObj->setDescription( $fromObj->getDescription() );
+        $toObj->setType( $fromObj->getType() );
+        $toObj->setViews( $fromObj->getViews() );
+        $toObj->setUpdatedAt( $fromObj->getUpdatedAt() );
+        foreach ($fromObj->getTaxonomies() as $fromTaxonomy)
+        {
+            $toObj->addTaxonomy($fromTaxonomy);
+        }
+    }
 
 
     // easyadmin
@@ -296,4 +290,5 @@ class Post
 
         return $this;
     }
+    
 }

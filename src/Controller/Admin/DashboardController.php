@@ -5,6 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Entity\Menu;
 use App\Entity\Post;
+use App\Entity\Post\Article;
+use App\Entity\Post\Chest;
+use App\Entity\Post\Item;
+use App\Entity\Post\Map;
+use App\Entity\Post\Mission;
+use App\Entity\Post\Mob;
 use App\Entity\Taxonomy;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -80,7 +86,18 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Back to wiki', 'fa fa-arrow-left', 'homepage');
 
         yield MenuItem::section("Articles");
-        yield MenuItem::linkToCrud('Post', 'fa fa-newspaper', Post::class);
+        
+
+        yield MenuItem::subMenu('Posts', 'fa fa-newspaper')->setSubItems([
+            MenuItem::linkToCrud('Article', 'fa fa-file-alt', Article::class),
+            MenuItem::linkToCrud('Chest', 'fa fa-suitcase', Chest::class),
+            MenuItem::linkToCrud('Item', 'fa fa-cube', Item::class),
+            MenuItem::linkToCrud('Map', 'fa fa-map', Map::class),
+            MenuItem::linkToCrud('Mission', 'fa fa-clipboard-check', Mission::class),
+            MenuItem::linkToCrud('Mob', 'fa fa-dragon', Mob::class),
+        ]);
+
+        
         yield MenuItem::linkToCrud('Category', 'fa fa-tags', Category::class);
         yield MenuItem::linkToCrud('Taxonomy', 'fa fa-cubes', Taxonomy::class);
 

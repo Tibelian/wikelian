@@ -2,7 +2,9 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Post;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
@@ -16,9 +18,15 @@ class EasyAdminSubscriber implements EventSubscriberInterface
      */
     private $passwordEncoder;
 
-    public function __construct(UserPasswordHasherInterface $passwordEncoder)
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    public function __construct(UserPasswordHasherInterface $passwordEncoder, EntityManagerInterface $entityManager)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->entityManager = $entityManager;
     }
 
     public static function getSubscribedEvents()
@@ -35,6 +43,9 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if($entity instanceof User) {
             $this->setUserPassword($entity);
         }
+        if($entity instanceof Post) {
+            $this->persistTaxonomies($entity);
+        }
     }
 
     public function prePersistedEntity(BeforeEntityPersistedEvent $event)
@@ -42,6 +53,9 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $entity = $event->getEntityInstance();
         if($entity instanceof User) {
             $this->setUserPassword($entity);
+        }
+        if($entity instanceof Post) {
+            $this->persistTaxonomies($entity);
         }
     }
 
@@ -54,4 +68,14 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             $user->eraseCredentials();
         }
     }
+
+    private function persistTaxonomies(Post $_post)
+    {
+        // cascade taxonomies -- without using doctrine annotation
+        foreach($_post->getTaxonomies() as $_taxonomy)
+        {
+            $this->entityManager->persist($_taxonomy);
+        }
+    }
+
 }

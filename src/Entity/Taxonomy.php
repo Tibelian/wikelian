@@ -28,8 +28,8 @@ class Taxonomy
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="taxonomies", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="taxonomies")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id", nullable=false)
      */
     private $post;
 
@@ -83,13 +83,40 @@ class Taxonomy
             if ($this->term == 'item_requirement_' . $i) return "Item Requirement +" . $i;
             if ($this->term == 'upgrade_requirement_' . $i) return "Item Upgrade Requirement +" . $i;
         }
-        if ($this->term == 'vnum') return 'VNUM';
-        if ($this->term == 'job') return 'Classes';
-        if ($this->term == 'sockets') return 'Sockets';
-        if ($this->term == 'model3d') return '3D Model';
-        if ($this->term == 'drop_stone') return 'Drop Metin Stone';
-        if ($this->term == 'drop_monster') return 'Drop Monster';
-        if ($this->term == 'drop_chest') return 'Drop Chest';
+        for ($n = 1; $n <= 20; $n++) {
+            if ($this->term == 'quest_level_' . $n) return $n . ". Level";
+            if ($this->term == 'quest_requirement_' . $n) return $n . ". Requirement";
+            if ($this->term == 'quest_reward_' . $n) return $n . ". Reward";
+            if ($this->term == 'quest_cooldown_' . $n) return $n . ". Cooldown";
+        }
+        switch ($this->term) 
+        {
+            // items
+            case 'vnum': return 'VNUM';
+            case 'job': return 'Classes';
+            case 'sockets': return 'Sockets';
+            case 'model3d': return '3D Model';
+            case 'drop_stone': return 'Drop Stone';
+            case 'drop_monster': return 'Drop Monster';
+            case 'drop_chest': return 'Drop Chest';
+            // chests
+            case 'chest_level': return 'Level';
+            case 'chest_origin': return 'Origin';
+            case 'chest_drop': return 'Drop';
+            // maps
+            case 'image': return 'Image';
+            case 'entry_requirement': return 'Entry Requirement';
+            case 'spawn_monster': return 'Spawn Monster';
+            case 'spawn_stone': return 'Spawn Stone';
+            case 'spawn_ore': return 'Spawn Ore Vein';
+            // mobs
+            case 'mob_image': return 'Image';
+            case 'mob_level': return 'Level';
+            case 'mob_hp': return 'HP';
+            case 'mob_spawn': return 'Spawn';
+            case 'mob_drop': return 'Drop';
+            case 'mob_weakness': return 'Weakness';
+        }
 
         return $this->term;
     }

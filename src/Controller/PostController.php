@@ -13,13 +13,16 @@ class PostController extends AbstractController
     /**
      * @Route("/p/{slug}", name="post")
      */
-    public function showOne(Post $post, Request $request): Response
+    public function showOne(Post $_post, Request $request): Response
     {
         // updates the views if is viewed first time this session
-        $this->updateSessionViews($post, $request);
+        $this->updateSessionViews($_post, $request);
 
-        //
-        $lastPosts = $this->getDoctrine()->getRepository(Post::class)->findLast($post->getId(), 5);
+        // last 5 posts - without including the current post
+        $lastPosts = $this->getDoctrine()->getRepository(Post::class)->findLast($_post->getId(), 5);
+
+        // cast the post to the correct entity
+        $post = $_post->cast();
 
         // show the template
         return $this->render('post/index.html.twig', [

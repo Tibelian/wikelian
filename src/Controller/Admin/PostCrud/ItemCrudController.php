@@ -1,34 +1,43 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\PostCrud;
 
 use App\Entity\Post;
-use App\Form\TaxonomyType;
+use App\Entity\Post\Item;
+use App\Form\ItemTaxonomyType;
+use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\TextAlign;
-use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
-use EasyCorp\Bundle\EasyAdminBundle\Contracts\Controller\CrudControllerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
-use EasyCorp\Bundle\EasyAdminBundle\Registry\CrudControllerRegistry;
-use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class PostCrudController extends AbstractCrudController
+class ItemCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Post::class;
+        return Item::class;
+    }
+
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $response = $this->get(EntityRepository::class)->createQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        $response->where("entity.type = 'item'");
+        return $response;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -49,11 +58,13 @@ class PostCrudController extends AbstractCrudController
             })
         ;
         return $actions
-            ->add(Crud::PAGE_EDIT, Action::DELETE)
             ->add(Crud::PAGE_INDEX, $view)
             ->add(Crud::PAGE_EDIT, $view)
             ->update(Crud::PAGE_EDIT, 'show', function(Action $action) {
                 return $action->setIcon('fa fa-eye');
+            })
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function(Action $action) {
+                return $action->setCssClass('d-none');
             })
         ;
     }
@@ -88,24 +99,20 @@ class PostCrudController extends AbstractCrudController
             AssociationField::new('category')
                 ->setFormTypeOptions(['required' => true]),
 
-            ChoiceField::new('type')
-                ->setChoices([
-                    'Article' => 'article',
-                    'Item' => 'item',
-                    'Mission' => 'mission',
-                    'Map' => 'map',
-                ]),
-
             TextEditorField::new('content'),
 
             HiddenField::new('views')
                 ->setFormTypeOptions($viewsOptions),
 
+            HiddenField::new('type')
+                ->setFormTypeOptions(['data' => 'item'])
+                ->onlyOnForms(),
+
             CollectionField::new('taxonomies')
                 ->allowAdd()
                 ->setEntryIsComplex(false)
                 ->showEntryLabel(false)
-                ->setEntryType(TaxonomyType::class)
+                ->setEntryType(ItemTaxonomyType::class)
                 ->addCssClass("mb-5")
                 ->setRequired(true)
                 ->hideOnIndex(),
