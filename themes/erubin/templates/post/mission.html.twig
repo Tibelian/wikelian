@@ -1,1 +1,83 @@
 
+
+<h1>
+    {% include 'post/_partials/_thumbnail.html.twig' with {'class': 'er-img'} %} 
+    {{ post.title }}
+</h1>
+
+<div class="wk_post_article p-3">
+
+    <div class="w-100 mb-3">
+        
+        {% if post.content %}
+            {{ post.content|raw }}
+        {% endif %}
+
+    </div>
+
+    <div class="w-100 mb-3">
+        
+        <table class="table table-hover table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Level</th>
+                    <th>Cooldown</th>
+                    <th>Requirement</th>
+                    <th>Reward</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% set maxQuests = 0 %}
+                {% for i in 1..21 %}
+                    {% for tx in post.taxonomies %}
+                        {% if tx.term == 'quest_level_' ~ i %}
+                            {% set maxQuests = maxQuests + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+
+                {% for i in 1..maxQuests %}
+                <tr>
+                    <td>
+                        {% for tx in post.taxonomies %}
+                            {% if tx.term == 'quest_level_' ~ i %}
+                                <strong>{{tx.value}}</strong>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for tx in post.taxonomies %}
+                            {% if tx.term == 'quest_cooldown_' ~ i %}
+                                {{tx.value}}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for tx in post.taxonomies %}
+                            <ul>
+                            {% if tx.term == 'quest_requirement_' ~ i %}
+                                <li>{{tx.value}}</li>
+                            {% endif %}
+                            </ul>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for tx in post.taxonomies %}
+                            <ul>
+                            {% if tx.term == 'quest_reward_' ~ i %}
+                                <li>{{tx.value}}</li>
+                            {% endif %}
+                            </ul>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+

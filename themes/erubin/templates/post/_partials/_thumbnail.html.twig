@@ -13,5 +13,7 @@
 {% endif %}
 
 {% if withoutModel3d and post.thumbnail %}
-    <img src="/images/uploaded/{{ post.thumbnail }}" width="100" alt="{{ post.slug }}" class="{{ class }}">
+    <img src="/images/uploaded/{{ post.thumbnail }}" width="200" alt="{{ post.slug }}" class="{{ class }}">
+{% elseif withoutModel3d %}
+    <img src="/images/notfound.png" width="200" alt="{{ post.slug }}">
 {% endif %}

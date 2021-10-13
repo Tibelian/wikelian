@@ -46,6 +46,12 @@ footer {
     font-size: 13px;
     color: var(--yellow);
 }
+footer a {
+    color: var(--gold);
+}
+footer a:hover {
+    color: var(--white);
+}
 aside {
     font-size: 14px;
 }

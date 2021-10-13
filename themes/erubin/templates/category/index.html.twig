@@ -37,6 +37,10 @@
                                     <a href="{{ path('post', {'slug':post.slug}) }}">
                                         <img src="/images/uploaded/{{ post.thumbnail }}" height="60" alt="{{ post.slug }}">
                                     </a>
+                                {% else %}
+                                    <a href="{{ path('post', {'slug':post.slug}) }}">
+                                        <img src="/images/notfound.png" height="60" alt="{{ post.slug }}">
+                                    </a>
                                 {% endif %}
                             </div>
                             <div class="h-100 ms-3">

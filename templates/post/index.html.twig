@@ -18,6 +18,8 @@
                     {% include 'post/mission.html.twig' %}
                 {% elseif post.type == 'map' %}
                     {% include 'post/map.html.twig' %}
+                {% elseif post.type == 'chest' %}
+                    {% include 'post/chest.html.twig' %}
                 {% endif %}
 
             </div>
