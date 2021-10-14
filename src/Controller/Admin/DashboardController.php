@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
-use App\Entity\Menu;
+use App\Entity\Design\Menu;
 use App\Entity\Post;
 use App\Entity\Post\Article;
 use App\Entity\Post\Chest;
