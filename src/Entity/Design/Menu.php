@@ -2,7 +2,7 @@
 
 namespace App\Entity\Design;
 
-use App\Repository\MenuRepository;
+use App\Repository\Design\MenuRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
