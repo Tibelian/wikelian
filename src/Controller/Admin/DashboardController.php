@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Entity\Design\Menu;
+use App\Entity\Design\Slider;
 use App\Entity\Post;
 use App\Entity\Post\Article;
 use App\Entity\Post\Chest;
@@ -103,6 +104,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section("Design");
         yield MenuItem::linkToCrud('Menu', 'fa fa-list', Menu::class);
+        yield MenuItem::linkToCrud('Carousel', 'fa fa-images', Slider::class);
 
         yield MenuItem::section("Settings");
         yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class);
