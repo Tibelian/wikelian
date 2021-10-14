@@ -7,7 +7,7 @@
     {% include 'post/_partials/_breadcrumb.html.twig' %}
 
     <section class="row justify-content-between p-2">
-        <article class="col-lg-10 p-0 pe-lg-3 pe-0">
+        <article class="col-lg-10 p-0 pe-lg-5 pe-0">
             <div class="post-content mb-3">
 
                 {% if post.type == 'article' %}
@@ -18,6 +18,8 @@
                     {% include 'post/mission.html.twig' %}
                 {% elseif post.type == 'map' %}
                     {% include 'post/map.html.twig' %}
+                {% elseif post.type == 'chest' %}
+                    {% include 'post/chest.html.twig' %}
                 {% endif %}
 
             </div>
@@ -25,7 +27,7 @@
         <aside class="col-lg-2 p-0">
 
             {% if post.category.posts|length > 1 %}
-            <div class="aside-content">
+            <div class="aside-content shadow">
                 <h2 class="p-2 mb-0">Similar articles</h2>
                 <div class="list-group rounded-0">
                     {% for postCat in post.category.posts %}
@@ -42,7 +44,7 @@
             </div>
             {% endif %}
 
-            <div class="aside-content">
+            <div class="aside-content shadow">
                 <h2 class="p-2 mb-0">Last articles</h2>
                 <div class="list-group rounded-0">
                     {% for lPost in lastPosts %}
