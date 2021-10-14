@@ -7,7 +7,7 @@ use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @ORM\Entity(repositoryClass=PostRepository::class, readOnly=true)
  * @ORM\Table(name="post")
  */
 class Item extends Post
