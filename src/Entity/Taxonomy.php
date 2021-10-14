@@ -117,6 +117,13 @@ class Taxonomy
             case 'mob_drop': return 'Drop';
             case 'mob_weakness': return 'Weakness';
         }
+        // missions
+        for ($i = 1; $i <= 20; $i++) {
+            if ($this->term == 'quest_level_'.$i) return $i.". Level";
+            if ($this->term == 'quest_requirement_'.$i) return $i.". Requirement";
+            if ($this->term == 'quest_reward_'.$i) return $i.". Reward";
+            if ($this->term == 'quest_cooldown_'.$i) return $i.". Cooldown";
+        }
 
         return $this->term;
     }
