@@ -37,11 +37,13 @@ class CategoryCrudController extends AbstractCrudController
             })
         ;
         return $actions
-            ->add(Crud::PAGE_EDIT, Action::DELETE)
             ->add(Crud::PAGE_INDEX, $view)
             ->add(Crud::PAGE_EDIT, $view)
             ->update(Crud::PAGE_EDIT, 'show', function(Action $action) {
                 return $action->setIcon('fa fa-eye');
+            })
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function(Action $action) {
+                return $action->setCssClass('d-none');
             })
         ;
     }

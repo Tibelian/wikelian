@@ -31,7 +31,9 @@ class MenuCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            ->add(Crud::PAGE_EDIT, Action::DELETE)
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function(Action $action) {
+                return $action->setCssClass('d-none');
+            })
         ;
     }
 
