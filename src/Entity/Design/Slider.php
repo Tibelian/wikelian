@@ -45,9 +45,9 @@ class Slider
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="json")
      */
-    private $position;
+    private $position = [];
 
     /**
      * @ORM\Column(type="boolean")
@@ -128,12 +128,12 @@ class Slider
         return $this;
     }
 
-    public function getPosition(): ?string
+    public function getPosition(): ?array
     {
         return $this->position;
     }
 
-    public function setPosition(string $position): self
+    public function setPosition(array $position): self
     {
         $this->position = $position;
 

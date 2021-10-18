@@ -57,7 +57,8 @@ class SliderCrudController extends AbstractCrudController
                     'Homepage' => 'homepage',
                     'Category page' => 'categorypage',
                     'Post page' => 'postpage',
-                ]),
+                ])
+                ->allowMultipleChoices(),
     
             ColorField::new('background')->showValue(true),
 

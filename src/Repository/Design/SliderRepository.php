@@ -24,10 +24,14 @@ class SliderRepository extends ServiceEntityRepository
      */
     public function homepage()
     {
-        return $this->findBy([
-            'position' => 'homepage',
-            'isEnabled' => true
-        ], ['id' => 'DESC']);
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.position LIKE :val')
+            ->andWhere('s.isEnabled = true')
+            ->setParameter('val', '%homepage%')
+            ->orderBy('s.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
@@ -35,10 +39,14 @@ class SliderRepository extends ServiceEntityRepository
      */
     public function categorypage()
     {
-        return $this->findBy([
-            'position' => 'categorypage',
-            'isEnabled' => true
-        ], ['id' => 'DESC']);
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.position LIKE :val')
+            ->andWhere('s.isEnabled = true')
+            ->setParameter('val', '%categorypage%')
+            ->orderBy('s.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
@@ -46,10 +54,14 @@ class SliderRepository extends ServiceEntityRepository
      */
     public function postpage()
     {
-        return $this->findBy([
-            'position' => 'postpage',
-            'isEnabled' => true
-        ], ['id' => 'DESC']);
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.position LIKE :val')
+            ->andWhere('s.isEnabled = true')
+            ->setParameter('val', '%postpage%')
+            ->orderBy('s.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**
