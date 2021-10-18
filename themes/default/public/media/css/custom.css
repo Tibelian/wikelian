@@ -331,3 +331,82 @@ WELCOME PAGE
     color: var(--red);
     border-bottom: 2px solid var(--red);
 }
+
+
+
+/*
+CAROUSEL - HOMEPAGE
+*/
+.wk_gallery_home {
+    height: 100% !important;
+}
+.wk_gallery_home img {
+    object-fit: cover;
+    height: 100%;
+}
+.wk_gallery_home .carousel-inner,
+.wk_gallery_home .carousel-item {
+    height: 100%;
+}
+
+
+/*
+CAROUSEL - HOMEPAGE
+*/
+.wk_gallery_home {
+    background-color: var(--er-bg-light);
+    border: 1px solid var(--er-red);
+    height: 100% !important;
+}
+.wk_gallery_home img {
+    object-fit: cover;
+    height: 100%;
+}
+.wk_gallery_home .carousel-inner,
+.wk_gallery_home .carousel-item {
+    height: 100%;
+}
+
+
+/*
+LAST POSTS & MENU - HOMEPAGE
+*/
+@media (max-width: 992px) {
+    .box-slider:nth-child(1) { order: 2; }
+    .box-slider:nth-child(2) { order: 1; margin-bottom: 30px; }
+    .box-slider:nth-child(3) { order: 3; }
+}
+.carousel-caption {
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.slide-background {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0.7;
+    z-index: 0;
+}
+.slide-content {
+    position: relative;
+    z-index: 1;
+}
+.wk_gallery_post {
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+.wk_gallery_category {
+    margin-top: 25px;
+    padding: 0;
+    height: 200px;
+    overflow: hidden;
+}
+.wk_gallery_category img {
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}

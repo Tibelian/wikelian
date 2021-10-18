@@ -4,6 +4,73 @@
 
 {% block body %}
 
+    {% set homepageSlider = slider.homepage %}
+    {% if homepageSlider|length > 0 %}
+    <section class="row p-2">
+        <div class="col-xl-2 col-lg-3 col-6 box-slider">
+            <div class="wk_menu_home">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% for option in menu.findOptionsByHomePos %}
+                        {% if option.isActive %}
+                            <li class="nav-item">
+                                {% if option.link %}
+                                    <a class="nav-link" href="{{ option.link }}">
+                                {% endif %}
+                                {{ option.name|raw }}
+                                {% if option.link %}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-xl-8 col-lg-6 box-slider">
+            <div id="homepagecarousel" class="carousel slide wk_gallery_home" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                
+                    {% for slide in homepageSlider %}
+                        <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                            <img src="/images/uploaded/{{ slide.image }}" class="d-block w-100" alt="slide {{ loop.index }}">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="slide-background" style="background-color: {{ slide.background }};"></div>
+                                <div class="slide-content">
+                                    {{ slide.content|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#homepagecarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#homepagecarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-3 col-6 box-slider">
+            <div class="wk_last_home">
+                <h2 class="p-2 mb-0">Last articles</h2>
+                <div class="list-group rounded-0">
+                    {% for lPost in lastPosts %}
+                        <a href="{{ path('post', {'slug':lPost.slug}) }}" class="list-group-item list-group-item-action border-0">
+                            {% if lPost.thumbnail %}
+                                <img src="/images/uploaded/{{ lPost.thumbnail }}" height="30" alt="{{ lPost.slug }}">
+                            {% endif %}
+                            {{ lPost.title }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
     <section class="row p-2 wk_popular">
 
         <div class="col-12 p-3">
