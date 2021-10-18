@@ -51,8 +51,6 @@ class SliderCrudController extends AbstractCrudController
             TextareaField::new('imageFile')
                 ->setFormType(VichImageType::class)
                 ->onlyOnForms(),
-    
-            ColorField::new('background'),
 
             ChoiceField::new('position')
                 ->setChoices([
@@ -60,6 +58,8 @@ class SliderCrudController extends AbstractCrudController
                     'Category page' => 'categorypage',
                     'Post page' => 'postpage',
                 ]),
+    
+            ColorField::new('background')->showValue(true),
 
             TextEditorField::new('content'),
             

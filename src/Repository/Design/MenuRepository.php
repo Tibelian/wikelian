@@ -46,6 +46,14 @@ class MenuRepository extends ServiceEntityRepository
     /**
      * @return Menu[] Returns an array of Menu objects
      */
+    public function findOptionsByHomePos()
+    {
+        return $this->findOptionsByPos("home");
+    }
+
+    /**
+     * @return Menu[] Returns an array of Menu objects
+     */
     public function findOptionsByPos($value)
     {
         return $this->createQueryBuilder('m')

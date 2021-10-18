@@ -24,9 +24,14 @@ class HomepageController extends AbstractController
             'views' => 'DESC'
         ], 12);
 
+        $lastPosts = $this->getDoctrine()->getRepository(Post::class)->findBy([], [
+            'id' => 'DESC'
+        ], 5);
+
         return $this->render('homepage/index.html.twig', [
             'categories' => $categories,
             'popularPosts' => $popularPosts,
+            'lastPosts' => $lastPosts,
         ]);
         
     }

@@ -19,6 +19,36 @@ class SliderRepository extends ServiceEntityRepository
         parent::__construct($registry, Slider::class);
     }
 
+    /**
+     * @return Slider[] Returns an array of Menu objects
+     */
+    public function homepage()
+    {
+        return $this->findBy([
+            'position' => 'homepage'
+        ], ['id' => 'DESC']);
+    }
+
+    /**
+     * @return Slider[] Returns an array of Menu objects
+     */
+    public function categorypage()
+    {
+        return $this->findBy([
+            'position' => 'category'
+        ], ['id' => 'DESC']);
+    }
+
+    /**
+     * @return Slider[] Returns an array of Menu objects
+     */
+    public function postpage()
+    {
+        return $this->findBy([
+            'position' => 'post'
+        ], ['id' => 'DESC']);
+    }
+
     // /**
     //  * @return Slider[] Returns an array of Slider objects
     //  */

@@ -47,6 +47,7 @@ class MenuCrudController extends AbstractCrudController
                     'Left' => 'left',
                     'Center' => 'center',
                     'Right' => 'right',
+                    'Home' => 'home',
                 ]),
             IntegerField::new('priority'),
             BooleanField::new('isActive'),
