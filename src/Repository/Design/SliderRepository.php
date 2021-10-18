@@ -25,7 +25,8 @@ class SliderRepository extends ServiceEntityRepository
     public function homepage()
     {
         return $this->findBy([
-            'position' => 'homepage'
+            'position' => 'homepage',
+            'isEnabled' => true
         ], ['id' => 'DESC']);
     }
 
@@ -35,7 +36,8 @@ class SliderRepository extends ServiceEntityRepository
     public function categorypage()
     {
         return $this->findBy([
-            'position' => 'category'
+            'position' => 'categorypage',
+            'isEnabled' => true
         ], ['id' => 'DESC']);
     }
 
@@ -45,7 +47,8 @@ class SliderRepository extends ServiceEntityRepository
     public function postpage()
     {
         return $this->findBy([
-            'position' => 'post'
+            'position' => 'postpage',
+            'isEnabled' => true
         ], ['id' => 'DESC']);
     }
 
