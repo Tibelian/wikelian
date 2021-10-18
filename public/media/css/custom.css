@@ -311,7 +311,7 @@ ITEM UPGRADES
 WELCOME PAGE
 */
 .wk_popular .btn {
-    background-color: var(--er-bg);
+    background-color: var(--er-bg-light);
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
@@ -320,7 +320,7 @@ WELCOME PAGE
     border-radius: 0 0 5px 5px;
     padding: 0;
 }
-.wk_popular .btn:hover {
+.wk_popular .btn:hover, .wk_popular .btn:focus  {
     filter: brightness(1.5);
 }
 .wk_popular .btn h3 {
@@ -359,7 +359,7 @@ WELCOME PAGE
 
 .wk_categories .wk_category {
     color: var(--yellow);
-    background-color: var(--er-bg);
+    background-color: var(--er-bg-light);
     border: 1px solid var(--er-red);
     border-radius: 5px;
     padding-bottom: 5px;
@@ -385,12 +385,12 @@ WELCOME PAGE
 .wk_categories .wk_category .list-group .list-group-item .badge {
     float: right;
     padding: 5px 15px;
-    background-color: var(--er-bg-light);
+    background-color: var(--er-bg);
     color: var(--er-text-dark);
 }
 .wk_categories .wk_category .list-group .list-group-item {
     color: var(--yellow);
-    background-color: var(--er-bg);
+    background-color: var(--er-bg-light);
 }
 .wk_categories .wk_category .list-group .list-group-item:hover {
     color: var(--white);
@@ -407,9 +407,9 @@ CATEGORY / POST PAGE
     background-position: center;
 
     background-color: var(--white);
-    color: var(--er-bg);
+    color: var(--er-bg-light);
     position: relative;
-    border: 4px ridge var(--yellow);
+    border: 3px ridge var(--yellow);
     border-radius: 5px;
 }
 .wk_category_page h1, article .post-content h1 {
@@ -435,7 +435,7 @@ article .post-content h1 {
     top: -30px;
 }
 .wk_category_page h2 {
-    color: var(--er-bg);
+    color: var(--er-bg-light);
 }
 @media (min-width: 998px) {
     .wk_category_page::before, article .post-content::before {
@@ -472,7 +472,7 @@ article .post-content, article .post-content h2 {
     color: var(--er-bg);
 }
 .wk_category_page_item .badge {
-    color: var(--er-bg-light);
+    color: var(--er-bg);
     background-color: rgba(0,0,0,.2);
 }
 .wk_category_page_item {
@@ -483,6 +483,90 @@ article .post-content, article .post-content h2 {
 }
 .wk_category_page_item h2:hover, a.wk_category_page_item:hover h2 {
     color: var(--er-red);
+}
+
+
+/*
+CAROUSEL - HOMEPAGE
+*/
+.wk_gallery_home {
+    background-color: var(--er-bg-light);
+    border: 1px solid var(--er-red);
+    height: 100% !important;
+}
+.wk_gallery_home img {
+    object-fit: cover;
+    height: 100%;
+}
+.wk_gallery_home .carousel-inner,
+.wk_gallery_home .carousel-item {
+    height: 100%;
+}
+
+
+/*
+LAST POSTS & MENU - HOMEPAGE
+*/
+.wk_last_home, .wk_menu_home {
+    background-color: var(--er-bg-light);
+    border: 1px solid var(--er-red);
+    height: 100% !important;
+    padding: 5px 10px;
+}
+.wk_last_home h2, .wk_menu_home h2 {
+    font-size: 18px;
+    margin-bottom: 7px !important;
+}
+.wk_last_home .list-group .list-group-item {
+    font-size: 14px;
+    padding: 3px 5px;
+    background-color: transparent;
+    color: var(--er-text-dark);
+}
+.wk_last_home .list-group .list-group-item:hover {
+    color: var(--white);
+}
+.wk_menu_home {
+    padding: 10px;
+}
+.wk_menu_home ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+.wk_menu_home ul li {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+}
+.wk_menu_home ul li a {
+    color: var(--yellow);
+    background-color: var(--er-bg);
+}
+.wk_menu_home ul li a:hover {
+    color: var(--white);
+}
+@media (max-width: 992px) {
+    .box-slider:nth-child(1) { order: 2; }
+    .box-slider:nth-child(2) { order: 1; margin-bottom: 30px; }
+    .box-slider:nth-child(3) { order: 3; }
+}
+.carousel-caption {
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.slide-background {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0.7;
+    z-index: 0;
+}
+.slide-content {
+    position: relative;
+    z-index: 1;
 }
 
 
