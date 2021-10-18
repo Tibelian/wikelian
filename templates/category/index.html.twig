@@ -55,6 +55,31 @@
             </div>
 
         </div>
-    </section
+    </section>
+
+    {% set catSliders = slider.categorypage %}
+    {% if catSliders|length > 0 %}
+    <section class="row p-2">
+        <div class="col-12 wk_gallery_category">
+            <div id="carouselPostpage" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for slide in catSliders %}
+                        <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                            <img src="/images/uploaded/{{ slide.image }}" class="d-block w-100" alt="slide {{ loop.index }} postpage">
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselPostpage" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselPostpage" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    {% endif %}
 
 {% endblock %}

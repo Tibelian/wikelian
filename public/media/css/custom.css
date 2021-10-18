@@ -568,6 +568,24 @@ LAST POSTS & MENU - HOMEPAGE
     position: relative;
     z-index: 1;
 }
+.wk_gallery_post {
+    margin-top: -20px;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+.wk_gallery_category {
+    border: 2px ridge var(--yellow);
+    border-radius: 5px;
+    margin-top: 25px;
+    padding: 0;
+    height: 200px;
+    overflow: hidden;
+}
+.wk_gallery_category img {
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
 
 
 /*
