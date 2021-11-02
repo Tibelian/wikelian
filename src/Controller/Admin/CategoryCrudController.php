@@ -8,9 +8,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -24,6 +26,7 @@ class CategoryCrudController extends AbstractCrudController
         return $crud
             ->setDefaultSort(['id' => 'DESC'])
             ->showEntityActionsInlined(true)
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
         ;
     }
     
@@ -56,7 +59,7 @@ class CategoryCrudController extends AbstractCrudController
             TextField::new('name'),
             SlugField::new('slug')->setTargetFieldName('name'),
             AssociationField::new('parent'),
-            TextEditorField::new('description'),
+            TextEditorField::new('description')->setFormType(CKEditorType::class),
         ];
     }
     

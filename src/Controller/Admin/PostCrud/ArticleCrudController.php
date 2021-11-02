@@ -16,12 +16,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArticleCrudController extends AbstractCrudController
@@ -43,6 +44,7 @@ class ArticleCrudController extends AbstractCrudController
         return $crud
             ->setDefaultSort(['id' => 'DESC'])
             ->showEntityActionsInlined(true)
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
         ;
     }
     
@@ -97,7 +99,7 @@ class ArticleCrudController extends AbstractCrudController
             AssociationField::new('category')
                 ->setFormTypeOptions(['required' => true]),
 
-            TextEditorField::new('content'),
+            TextEditorField::new('content')->setFormType(CKEditorType::class),
 
             HiddenField::new('views')
                 ->setFormTypeOptions($viewsOptions),
