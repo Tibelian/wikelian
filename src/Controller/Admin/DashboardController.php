@@ -108,6 +108,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section("Settings");
         yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class);
+        yield MenuItem::linkToRoute('Import', 'fa fa-file-import', 'admin_import');
         
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

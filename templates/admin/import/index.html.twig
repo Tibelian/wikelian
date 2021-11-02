@@ -1,0 +1,74 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title 'Import from database' %}
+
+{% block main %}
+
+    {{ form_start(importForm) }}
+
+    <p>Insert the credentials to connect to the database, then choose the category where you want to import the mobs or items. If no category is selected then that mob type or item type will not be mapped. This tool reads all the content from <code>item_proto</code> and <code>mob_proto</code>. Then inserts all the posts with the mapped data from the selected database. This script cannot include images or 3D models from your client game, but you could select an icon database CDN in preferences to bind the VNUM with the image if it is found.</p>
+
+    <p class="fw-bold">Save a backup of your current wiki database before any import!</p>
+    
+
+    <div class="d-flex flex-wrap my-3 border-top py-3 border-bottom">
+        <button type="submit" class="btn btn-lg btn-primary me-2">1. Start data dump</button>
+        <button type="submit" class="btn btn-lg btn-primary disabled" disabled>2. Import data</button>
+        <a href="#" class="btn btn-lg btn-secondary ms-auto">Create a backup</a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-sm-6">
+
+            <h2>DB Connection</h2>
+            {{ form_label(importForm.db_host, 'HOST:') }}
+            {{ form_widget(importForm.db_host, {'attr':{'class':'form-control form-control-sm mb-2'}}) }}
+
+            {{ form_label(importForm.db_user, 'USER:') }}
+            {{ form_widget(importForm.db_user, {'attr':{'class':'form-control form-control-sm mb-2'}}) }}
+
+            {{ form_label(importForm.db_pass, 'PASSWORD:') }}
+            {{ form_widget(importForm.db_pass, {'attr':{'class':'form-control form-control-sm mb-2'}}) }}
+
+            {{ form_label(importForm.db_port, 'PORT:') }}
+            {{ form_widget(importForm.db_port, {'attr':{'class':'form-control form-control-sm mb-3'}}) }}
+
+            <h2 class="mt-4">Preferences</h2>
+            {{ form_label(importForm.pref_icons, 'ICON DB:') }}
+            {{ form_widget(importForm.pref_icons, {'attr':{'class':'form-control form-control-sm mb-3'}}) }}
+
+            {{ form_label(importForm.pref_3dmodel, '3D MODEL:') }}
+            {{ form_widget(importForm.pref_3dmodel, {'attr':{'class':'form-control form-control-sm mb-3'}}) }}
+
+        </div>
+        <div class="col-lg-3 col-sm-6">
+
+            <h2>Mobs</h2>
+            {% for input in importForm %}
+                {% if input.vars.name starts with 'MOB_'  %}
+                    {{ form_label(input, input.vars.name ~ ':') }}
+                    {{ form_widget(input, {'attr':{'class':'form-control form-control-sm mb-3'}}) }}
+                {% endif %}
+            {% endfor %}
+
+        </div>
+        <div class="col-lg-5 col-sm-6">
+
+            <h2 class="w-100">Items</h2>
+            <div class="row">
+            {% for input in importForm %}
+                {% if input.vars.name starts with 'ITEM_'  %}
+                    <div class="col-md-4 col-6">
+                    {{ form_label(input, input.vars.name ~ ':') }}
+                    {{ form_widget(input, {'attr':{'class':'form-control form-control-sm mb-3'}}) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    {{ form_end(importForm) }}
+
+
+{% endblock %}
