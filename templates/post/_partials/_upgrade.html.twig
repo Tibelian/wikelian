@@ -14,7 +14,7 @@
                         <li class="req_wear">
                             <ul>
                             {% for req in upgrade.requirements_wear %}
-                                <li>{{ req }}</li>
+                                <li>{{ req|raw }}</li>
                             {% endfor %}
                             </ul>
                         </li>
@@ -23,7 +23,7 @@
                         <li class="attr">
                             <ul>
                             {% for attr in upgrade.attributes %}
-                                <li>{{ attr }}</li>
+                                <li>{{ attr|raw }}</li>
                             {% endfor %}
                             </ul>
                         </li>
@@ -32,7 +32,7 @@
                         <li class="req">
                             <ul>
                             {% for req in upgrade.requirements %}
-                                <li>{{ req }}</li>
+                                <li>{{ req|raw }}</li>
                             {% endfor %}
                             </ul>
                         </li>

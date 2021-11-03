@@ -17,13 +17,13 @@
         <ul class="list-group list-group-horizontal-xl rounded-0">
         {% for tx in post.taxonomies %}
             {% if tx.term == 'vnum' %}
-                <li class="list-group-item w-100 rounded-0"><strong>VNUM</strong>: {{ tx.value }} </li>
+                <li class="list-group-item w-100 rounded-0"><strong>VNUM</strong>: {{ tx.value|raw }} </li>
             {% endif %}
             {% if tx.term == 'job' %}
-                <li class="list-group-item w-100 rounded-0"><strong>CLASS</strong>: {{ tx.value }} </li>
+                <li class="list-group-item w-100 rounded-0"><strong>CLASS</strong>: {{ tx.value|raw }} </li>
             {% endif %}
             {% if tx.term == 'sockets' %}
-                <li class="list-group-item w-100 rounded-0"><strong>SOCKETS</strong>: {{ tx.value }} </li>
+                <li class="list-group-item w-100 rounded-0"><strong>SOCKETS</strong>: {{ tx.value|raw }} </li>
             {% endif %}
         {% endfor %}
         </ul>

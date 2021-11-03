@@ -31,7 +31,7 @@
                     <strong>ENTRY REQUIREMENTS</strong>:
                     <ul>
                         {% for rq in requirements %}
-                            <li> {{ rq }} </li>
+                            <li> {{ rq|raw }} </li>
                         {% endfor %}
                     </ul>
                 </li>
@@ -46,7 +46,7 @@
             <ul>
                 {% for tx in post.taxonomies %}
                     {% if tx.term == 'spawn_monster' %}
-                        <li> {{ tx.value }} </li>
+                        <li> {{ tx.value|raw }} </li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -56,7 +56,7 @@
             <ul>
                 {% for tx in post.taxonomies %}
                     {% if tx.term == 'spawn_stone' %}
-                        <li> {{ tx.value }} </li>
+                        <li> {{ tx.value|raw }} </li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -66,7 +66,7 @@
             <ul>
                 {% for tx in post.taxonomies %}
                     {% if tx.term == 'spawn_ore' %}
-                        <li> {{ tx.value }} </li>
+                        <li> {{ tx.value|raw }} </li>
                     {% endif %}
                 {% endfor %}
             </ul>

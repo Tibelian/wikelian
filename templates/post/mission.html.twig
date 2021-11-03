@@ -42,14 +42,14 @@
                     <td>
                         {% for tx in post.taxonomies %}
                             {% if tx.term == 'quest_level_' ~ i %}
-                                <strong>{{tx.value}}</strong>
+                                <strong>{{tx.value|raw}}</strong>
                             {% endif %}
                         {% endfor %}
                     </td>
                     <td>
                         {% for tx in post.taxonomies %}
                             {% if tx.term == 'quest_cooldown_' ~ i %}
-                                {{tx.value}}
+                                {{tx.value|raw}}
                             {% endif %}
                         {% endfor %}
                     </td>
@@ -57,7 +57,7 @@
                         {% for tx in post.taxonomies %}
                             <ul>
                             {% if tx.term == 'quest_requirement_' ~ i %}
-                                <li>{{tx.value}}</li>
+                                <li>{{tx.value|raw}}</li>
                             {% endif %}
                             </ul>
                         {% endfor %}
@@ -66,7 +66,7 @@
                         {% for tx in post.taxonomies %}
                             <ul>
                             {% if tx.term == 'quest_reward_' ~ i %}
-                                <li>{{tx.value}}</li>
+                                <li>{{tx.value|raw}}</li>
                             {% endif %}
                             </ul>
                         {% endfor %}
