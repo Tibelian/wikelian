@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Taxonomy;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -25,7 +26,7 @@ class MapTaxonomyType extends AbstractType
                 'required' => true,
                 'choices' => $termOptions
             ])
-            ->add('value', TextareaType::class, [
+            ->add('value', CKEditorType::class, [
                 'required' => true,
             ])
         ;

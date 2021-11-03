@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class TaxonomyCrudController extends AbstractCrudController
 {
@@ -96,7 +97,7 @@ class TaxonomyCrudController extends AbstractCrudController
 
         return [
             ChoiceField::new('term')->setChoices($termOptions),
-            TextareaField::new('value'),
+            TextareaField::new('value')->setFormType(CKEditorType::class),
             AssociationField::new('post'),
         ];
     }
